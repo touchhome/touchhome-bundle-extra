@@ -1,10 +1,9 @@
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <url>https://github.com/touchhome/touchhome-bundle-extra</url>
 
     <packaging>pom</packaging>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 
     <artifactId>touchhome-bundle-extra</artifactId>
     <groupId>org.touchhome</groupId>
@@ -143,7 +142,7 @@
         <connection>scm:git:git://github.com/github.com/touchhome/touchhome-bundle-extra.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/touchhome/touchhome-bundle-extra.git</developerConnection>
         <url>https://github.com/touchhome/touchhome-bundle-extra</url>
-        <tag>HEAD</tag>
+        <tag>touchhome-bundle-extra-1.0.0</tag>
     </scm>
 
     <repositories>
