@@ -22,7 +22,7 @@
 
     <properties>
         <jackson.version>2.10.3</jackson.version>
-        <touchhome-bundle.version>1.0.4</touchhome-bundle.version>
+        <touchhome-bundle.version>1.0.5</touchhome-bundle.version>
     </properties>
 
     <dependencies>
