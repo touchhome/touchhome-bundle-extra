@@ -157,22 +157,13 @@
     </repositories>
 
     <build>
+
         <plugins>
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
-                <configuration>
-                    <outputDirectory>${basedir}/target</outputDirectory>
-                    <resources>
-                        <resource>
-                            <directory>${basedir}</directory>
-                            <include>bintray.json</include>
-                            <filtering>true</filtering>
-                        </resource>
-                    </resources>
-                </configuration>
                 <executions>
                     <execution>
-                        <id>copy-config-files</id>
+                        <id>copy-resource-files</id>
                         <phase>package</phase>
                         <goals>
                             <goal>copy-resources</goal>
@@ -181,9 +172,12 @@
                             <outputDirectory>${project.build.directory}</outputDirectory>
                             <resources>
                                 <resource>
-                                    <filtering>true</filtering>
+                                    <directory>${basedir}/resources</directory>
+                                </resource>
+                                <resource>
                                     <directory>${basedir}</directory>
                                     <include>bintray.json</include>
+                                    <filtering>true</filtering>
                                 </resource>
                             </resources>
                         </configuration>
