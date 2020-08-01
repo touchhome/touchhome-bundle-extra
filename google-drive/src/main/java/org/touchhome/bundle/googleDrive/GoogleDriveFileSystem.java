@@ -11,7 +11,7 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.model.File;
 import com.google.api.services.oauth2.Oauth2;
-import com.google.api.services.oauth2.model.Userinfoplus;
+import com.google.api.services.oauth2.model.Userinfo;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -230,9 +230,9 @@ public class GoogleDriveFileSystem implements BundleEntrypoint {
      * @return User's information.
      * @throws NoUserIdException An error occurred.
      */
-    private Userinfoplus getUserInfo(Credential credentials) throws NoUserIdException {
+    private Userinfo getUserInfo(Credential credentials) throws NoUserIdException {
         Oauth2 userInfoService = new Oauth2.Builder(HTTP_TRANSPORT, JSON_FACTORY, credentials).setApplicationName(APPLICATION_NAME).build();
-        Userinfoplus userInfo = null;
+        Userinfo userInfo = null;
         try {
             userInfo = userInfoService.userinfo().get().execute();
         } catch (IOException e) {

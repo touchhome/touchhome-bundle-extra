@@ -15,25 +15,25 @@
         <dependency>
             <groupId>com.google.api-client</groupId>
             <artifactId>google-api-client</artifactId>
-            <version>1.30.8</version>
+            <version>1.30.10</version>
         </dependency>
 
         <dependency>
             <groupId>com.google.oauth-client</groupId>
             <artifactId>google-oauth-client-jetty</artifactId>
-            <version>1.30.5</version>
+            <version>1.31.0</version>
         </dependency>
 
         <dependency>
             <groupId>com.google.apis</groupId>
             <artifactId>google-api-services-drive</artifactId>
-            <version>v3-rev192-1.25.0</version>
+            <version>v3-rev197-1.25.0</version>
         </dependency>
 
         <dependency>
             <groupId>com.google.apis</groupId>
             <artifactId>google-api-services-oauth2</artifactId>
-            <version>v2-rev151-1.25.0</version>
+            <version>v2-rev157-1.25.0</version>
         </dependency>
     </dependencies>
 
