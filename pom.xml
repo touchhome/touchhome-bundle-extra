@@ -3,7 +3,7 @@
     <url>https://github.com/touchhome/touchhome-bundle-extra</url>
 
     <packaging>pom</packaging>
-    <version>1.0.4</version>
+    <version>1.0.5-SNAPSHOT</version>
 
     <artifactId>touchhome-bundle-extra</artifactId>
     <groupId>org.touchhome.bundle.extra</groupId>
@@ -175,7 +175,7 @@
         <connection>scm:git:git://github.com/github.com/touchhome/touchhome-bundle-extra.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/touchhome/touchhome-bundle-extra.git</developerConnection>
         <url>https://github.com/touchhome/touchhome-bundle-extra</url>
-        <tag>touchhome-bundle-extra-1.0.4</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <repositories>
