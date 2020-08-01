@@ -11,6 +11,7 @@
     <name>nrf24i01</name>
     <description>NRF24I01 uses for accessing arduino by air</description>
     <packaging>jar</packaging>
+    <version>1.0.5-SNAPSHOT</version>
 
     <dependencies>
         <dependency>

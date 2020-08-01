@@ -10,6 +10,7 @@
     <artifactId>bundle-rf433</artifactId>
     <name>RF433</name>
     <packaging>jar</packaging>
+    <version>1.0.5-SNAPSHOT</version>
 
     <dependencies>
 
