@@ -184,8 +184,8 @@ public class GoogleDriveFileSystem implements BundleEntrypoint {
         UserEntity userEntity = entityContext.getEntity("u_" + userName);
         if (userEntity != null) {
             GoogleCredential credential = new GoogleCredential.Builder().setJsonFactory(JSON_FACTORY).setTransport(HTTP_TRANSPORT).setClientSecrets(googleClientSecrets).build();
-            credential.setAccessToken(userEntity.getGoogleDriveAccessToken());
-            credential.setRefreshToken(userEntity.getGoogleDriveRefreshToken());
+            //credential.setAccessToken(userEntity.getGoogleDriveAccessToken());
+           //credential.setRefreshToken(userEntity.getGoogleDriveRefreshToken());
             return credential;
         }
         return null;
@@ -194,8 +194,8 @@ public class GoogleDriveFileSystem implements BundleEntrypoint {
     void storeCredentials(String userId, Credential credentials) {
         UserEntity userEntity = entityContext.getEntity(ADMIN_USER);
         userEntity.setUserId(userId);
-        userEntity.setGoogleDriveAccessToken(credentials.getAccessToken());
-        userEntity.setGoogleDriveRefreshToken(credentials.getRefreshToken());
+        //userEntity.setGoogleDriveAccessToken(credentials.getAccessToken());
+        //userEntity.setGoogleDriveRefreshToken(credentials.getRefreshToken());
         entityContext.save(userEntity);
     }
 

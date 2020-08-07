@@ -42,12 +42,15 @@ public class Rf24Communicator extends RF24Base {
 
     @SneakyThrows
     public boolean stopRunPipeReadWrite() {
-        globalReadingThread.interrupt();
-        globalWritingThread.interrupt();
-        globalReadingThread.join(60000);
-        globalWritingThread.join(60000);
-
-        return !globalReadingThread.isAlive() && !globalWritingThread.isAlive();
+        if (globalReadingThread != null) {
+            globalReadingThread.interrupt();
+            globalReadingThread.join(60000);
+        }
+        if (globalWritingThread != null) {
+            globalWritingThread.interrupt();
+            globalWritingThread.join(60000);
+        }
+        return !(globalReadingThread != null && globalReadingThread.isAlive()) && !(globalWritingThread != null && globalWritingThread.isAlive());
     }
 
     public void runPipeReadWrite() {

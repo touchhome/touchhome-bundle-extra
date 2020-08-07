@@ -21,7 +21,7 @@ public class RF433Controller {
     private static final String[] BUCKETS = new String[]{"#2f4554", "#c23531", "#e530cd", "#5cd538", "#7ca470", "#2787c7", "#27c7b4", "#b23ddc", "#8500b6", "#f510a1",
             "#bb7c16", "#f99f0f", "#e04e1a", "#f21d56", "#721df2", "#1d80f2", "#95beec", "#11fc7f"};
     @Autowired
-    private Rf433Service rf433Service;
+    private Rf433Entrypoint rf433Entrypoint;
 
     public static void main(String[] args) throws IOException {
         File file = new File("c:\\Users\\Ruslan\\SmartHome\\rf433\\testWave.getPinRequestType");
@@ -43,7 +43,7 @@ public class RF433Controller {
 
     @PostMapping("saveRf433Wave")
     public RF433SignalEntity saveRf433Wave(@RequestBody Rf433JSON rf433JSON) throws IOException {
-        return rf433Service.save();
+        return rf433Entrypoint.save();
     }
 
   /*  @RequestMapping(value = "/testRf433Transmitter", method = RequestMethod.POST)

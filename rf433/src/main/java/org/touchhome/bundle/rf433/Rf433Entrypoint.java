@@ -30,7 +30,7 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 @Log4j2
 @Component
 @RequiredArgsConstructor
-public class Rf433Service implements BundleEntrypoint {
+public class Rf433Entrypoint implements BundleEntrypoint {
     private static Path rf433Dir = TouchHomeUtils.resolvePath("rf433");
     private final EntityContext entityContext;
     private Path rf433TransmitterPy;

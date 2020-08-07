@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <url>https://github.com/touchhome/touchhome-bundle-extra</url>
 
@@ -18,11 +19,12 @@
         <module>google-drive</module>
         <module>rf433</module>
         <module>nrf24i01</module>
+        <module>weather</module>
     </modules>
 
     <properties>
         <jackson.version>2.11.1</jackson.version>
-        <touchhome-bundle-api.version>1.0.7</touchhome-bundle-api.version>
+        <touchhome-bundle-api.version>1.0.8-SNAPSHOT</touchhome-bundle-api.version>
         <touchhome-bundle.version>1.0.10</touchhome-bundle.version>
     </properties>
 
@@ -30,6 +32,13 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-text</artifactId>
+            <version>1.9</version>
             <scope>provided</scope>
         </dependency>
 

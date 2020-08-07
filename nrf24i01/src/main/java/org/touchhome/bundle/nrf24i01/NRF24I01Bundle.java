@@ -69,6 +69,11 @@ public class NRF24I01Bundle implements BundleEntrypoint {
         }
     }
 
+    @Override
+    public void destroy() {
+        rf24Communicator.stopRunPipeReadWrite();
+    }
+
     public void init() {
         loadLibrary();
         if (isNrf24L01Works()) {
