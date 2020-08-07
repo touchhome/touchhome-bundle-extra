@@ -15,8 +15,6 @@ import java.util.Map;
 public class OpenWeatherMapProvider extends BaseWeatherProvider<OpenWeatherMapProvider.WeatherJSON> {
     private static final String URL = "https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${key}&units=${unit}&lang=${lang}";
     private final EntityContext entityContext;
-    private WeatherJSON lastWeatherJSON;
-    private long lastRequestTimeout;
 
     public OpenWeatherMapProvider(EntityContext entityContext) {
         super(WeatherJSON.class, URL);

@@ -2,7 +2,6 @@ package org.touchhome.bundle.weather.workspace;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
-import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 import org.touchhome.bundle.api.EntityContext;
 import org.touchhome.bundle.api.scratch.*;
@@ -46,15 +45,14 @@ public class Scratch3WeatherBlocks extends Scratch3ExtensionBlocks {
     }
 
     private Double readWeatherPressure(WorkspaceBlock workspaceBlock) {
-        return entityContext.getSettingValue(WeatherProviderSetting.class).readWeatherTemperature(workspaceBlock.getInputString(CITY));
+        return entityContext.getSettingValue(WeatherProviderSetting.class).readWeatherPressure(workspaceBlock.getInputString(CITY));
     }
 
     private Double readWeatherHumidity(WorkspaceBlock workspaceBlock) {
-        return entityContext.getSettingValue(WeatherProviderSetting.class).readWeatherTemperature(workspaceBlock.getInputString(CITY));
+        return entityContext.getSettingValue(WeatherProviderSetting.class).readWeatherHumidity(workspaceBlock.getInputString(CITY));
     }
 
     private Object readWeather(WorkspaceBlock workspaceBlock) {
-        Object json = entityContext.getSettingValue(WeatherProviderSetting.class).readWeather(workspaceBlock.getInputString(CITY));
-        return new JSONObject(json);
+        return entityContext.getSettingValue(WeatherProviderSetting.class).readWeather(workspaceBlock.getInputString(CITY));
     }
 }

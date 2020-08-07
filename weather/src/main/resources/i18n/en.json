@@ -1,4 +1,16 @@
 {
+  "field": {
+    "weather": {
+      "type": "Widget type"
+    }
+  },
+  "selection": {
+    "weather": "Weather widgets",
+    "OpenWeatherWidgetTemplate": "Open Weather widget"
+  },
+  "widget": {
+    "WeatherWidget": "Widget shows weather info"
+  },
   "weather": {
     "name": "Weather",
     "extensionDescription": "Weather blocks",

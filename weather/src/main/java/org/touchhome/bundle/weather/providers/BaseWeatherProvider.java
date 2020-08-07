@@ -23,7 +23,7 @@ public abstract class BaseWeatherProvider<T> implements WeatherProvider<T>, HasD
     /**
      * Read from weather provider not ofter than one minute
      */
-    protected T readJson(String city) {
+    private synchronized T readJson(String city) {
         if (data == null || System.currentTimeMillis() - lastRequestTimeout > 60000) {
             CityToGeoLocation cityGeolocation = findCityGeolocation(city);
             data = Curl.get(buildWeatherRequest(city, cityGeolocation.latt, cityGeolocation.longt).replace(url), weatherJSONType);
@@ -36,7 +36,8 @@ public abstract class BaseWeatherProvider<T> implements WeatherProvider<T>, HasD
         return readJson(city);
     }
 
-    protected CityToGeoLocation findCityGeolocation(String city) {
+    // sync to avoid too many requests
+    private CityToGeoLocation findCityGeolocation(String city) {
         if (!cityToGeoMap.containsKey(city)) {
             OpenWeatherMapProvider.CityToGeoLocation cityToGeoLocation = Curl.get("https://geocode.xyz/" + city + "?json=1", OpenWeatherMapProvider.CityToGeoLocation.class);
             if (cityToGeoLocation.error != null) {
