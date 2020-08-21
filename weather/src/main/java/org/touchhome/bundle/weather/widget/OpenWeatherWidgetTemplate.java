@@ -3,8 +3,6 @@ package org.touchhome.bundle.weather.widget;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 import org.touchhome.bundle.api.EntityContext;
 import org.touchhome.bundle.api.ui.field.UIField;
@@ -29,9 +27,6 @@ public class OpenWeatherWidgetTemplate implements WidgetJSBaseTemplate {
     @UIField(order = 2, label = "city")
     private String city_name;
 
-    @UIField(order = 3)
-    private WeatherUnitSetting.WeatherUnit units;
-
     @Override
     public String getIcon() {
         return "fas fa-sun";
@@ -46,19 +41,20 @@ public class OpenWeatherWidgetTemplate implements WidgetJSBaseTemplate {
     @SneakyThrows
     public void createWidget(JavaScriptBuilder javaScriptBuilder) {
         javaScriptBuilder.css("widget-left", "margin: 0 !important;");
+        javaScriptBuilder.setJsonReadOnly();
         String containerId = "cow-" + System.currentTimeMillis();
         javaScriptBuilder
                 .jsonParam("id", "15")
-                .jsonParam("city_name", TouchHomeUtils.getIpGeoLocation().getCity())
-                .jsonParam("units", entityContext.getSettingValue(WeatherUnitSetting.class))
-                .jsonParam("appid", entityContext.getSettingValue(WeatherApiKeySetting.class));
-        javaScriptBuilder.readyOnClient().window(window ->
-                window.parameter("myWidgetParam", new JSONArray()).put(new JSONObject()
-                        .put("id", "${id}")
-                        .put("containerid", containerId)
-                        .put("city_name", "${city_name}")
-                        .put("units", "${units}")
-                        .put("appid", "${appid}")))
+                .jsonParam("city_name", TouchHomeUtils.getIpGeoLocation().getCity());
+
+        javaScriptBuilder.readyOnClient().window(window -> {
+            window.array("myWidgetParam")
+                    .value("id", "${id}")
+                    .value("city_name", "${city_name}")
+                    .value("containerid", containerId)
+                    .value("units", (JavaScriptBuilder.ProxyEntityContextValue) entityContext -> entityContext.getSettingValue(WeatherUnitSetting.class))
+                    .value("appid", (JavaScriptBuilder.ProxyEntityContextValue) entityContext -> entityContext.getSettingValue(WeatherApiKeySetting.class));
+        })
                 .addGlobalScript("//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js");
 
         javaScriptBuilder.jsContent().div(style -> style.id(containerId), div -> {

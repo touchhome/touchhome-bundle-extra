@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>touchhome-bundle-extra</artifactId>
         <groupId>org.touchhome.bundle.extra</groupId>
@@ -7,10 +8,18 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>touchhome-bundle-rf433</artifactId>
-    <name>RF433</name>
+    <artifactId>touchhome-bundle-ipscanner</artifactId>
+    <name>Angry Ip Scanner</name>
     <packaging>jar</packaging>
     <version>1.0.6-SNAPSHOT</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.touchhome</groupId>
+            <artifactId>azib-ipscan</artifactId>
+            <version>3.7.2</version>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>

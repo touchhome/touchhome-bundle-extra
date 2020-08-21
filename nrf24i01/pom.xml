@@ -7,7 +7,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>bundle-nrf24i01</artifactId>
+    <artifactId>touchhome-bundle-nrf24i01</artifactId>
     <name>nrf24i01</name>
     <description>NRF24I01 uses for accessing arduino by air</description>
     <packaging>jar</packaging>
@@ -16,7 +16,7 @@
     <dependencies>
         <dependency>
             <groupId>org.touchhome.bundle</groupId>
-            <artifactId>bundle-arduino</artifactId>
+            <artifactId>touchhome-bundle-arduino</artifactId>
             <version>${touchhome-bundle.version}</version>
             <scope>provided</scope>
         </dependency>
