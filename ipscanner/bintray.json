@@ -1,0 +1,51 @@
+{
+  "package": {
+    "name": "@project.artifactId@",
+    "repo": "maven-repo-extra-bundles",
+    "subject": "touchhome",
+    "website_url": "https://github.com/touchhome/touchhome-bundle-extra",
+    "issue_tracker_url": "https://github.com/touchhome/touchhome-bundle-extra/issues",
+    "vcs_url": "https://github.com/touchhome/touchhome-bundle-extra",
+    "licenses": [
+      "MIT"
+    ],
+    "public_download_numbers": true,
+    "public_stats": true
+  },
+  "version": {
+    "name": "@project.version@",
+    "released": "@maven.build.timestamp@",
+    "vcs_tag": "@project.version@"
+  },
+  "files": [
+    {
+      "includePattern": "@project.basedir@/pom.xml",
+      "uploadPattern": "org/touchhome/bundle/extra/@project.artifactId@/@project.version@/@project.artifactId@-@project.version@.pom",
+      "matrixParams": {
+        "override": 1
+      }
+    },
+    {
+      "includePattern": "@project.basedir@/target/(.*\.jar)",
+      "uploadPattern": "org/touchhome/bundle/extra/@project.artifactId@/@project.version@/$1",
+      "matrixParams": {
+        "override": 1
+      }
+    },
+    {
+      "includePattern": "@project.basedir@/README.md",
+      "uploadPattern": "org/touchhome/bundle/extra/@project.artifactId@/@project.version@/README.md",
+      "matrixParams": {
+        "override": 1
+      }
+    },
+    {
+      "includePattern": "@project.basedir@/src/main/resources/image.png",
+      "uploadPattern": "org/touchhome/bundle/extra/@project.artifactId@/@project.version@/image64.png",
+      "matrixParams": {
+        "override": 1
+      }
+    }
+  ],
+  "publish": true
+}
