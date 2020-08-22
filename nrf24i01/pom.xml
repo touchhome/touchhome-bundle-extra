@@ -8,7 +8,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>touchhome-bundle-nrf24i01</artifactId>
-    <name>nrf24i01</name>
+    <name>NRF24I01</name>
     <description>NRF24I01 uses for accessing arduino by air</description>
     <packaging>jar</packaging>
     <version>1.0.9-SNAPSHOT</version>

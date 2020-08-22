@@ -8,6 +8,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>touchhome-bundle-weather</artifactId>
+    <name>Weather</name>
     <packaging>jar</packaging>
     <version>1.0.9-SNAPSHOT</version>
 
