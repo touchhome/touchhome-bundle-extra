@@ -3,14 +3,14 @@
     <parent>
         <artifactId>touchhome-bundle-extra</artifactId>
         <groupId>org.touchhome.bundle.extra</groupId>
-        <version>1.0.9-SNAPSHOT</version>
+        <version>1.0.9</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>touchhome-bundle-google-drive</artifactId>
     <name>Google-Drive</name>
     <packaging>jar</packaging>
-    <version>1.0.9-SNAPSHOT</version>
+    <version>1.0.9</version>
 
     <dependencies>
         <dependency>
