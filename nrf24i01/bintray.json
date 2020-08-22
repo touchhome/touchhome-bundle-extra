@@ -40,8 +40,8 @@
       }
     },
     {
-      "includePattern": "@project.basedir@/src/main/resources/image.png",
-      "uploadPattern": "org/touchhome/bundle/extra/@project.artifactId@/@project.version@/image64.png",
+      "includePattern": "@project.basedir@/src/main/resources/image64.png",
+      "uploadPattern": "org/touchhome/bundle/extra/@project.artifactId@/@project.version@/image.png",
       "matrixParams": {
         "override": 1
       }
