@@ -15,17 +15,11 @@
     "name": "Weather",
     "extensionDescription": "Weather blocks",
     "setting": {
+      "label": "Weather settings",
       "st_WeatherProviderSetting": "Weather provider",
       "st_WeatherApiKeySetting": "Weather api key",
       "st_WeatherLangSetting": "Weather lang",
       "st_WeatherUnitSetting": "Weather unit"
-    }
-  },
-  "setting": {
-    "bundle": {
-      "weather": {
-        "label": "Weather settings"
-      }
     }
   }
 }
