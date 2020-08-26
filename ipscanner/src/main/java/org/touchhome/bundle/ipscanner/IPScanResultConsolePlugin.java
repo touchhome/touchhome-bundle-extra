@@ -7,7 +7,7 @@ import lombok.SneakyThrows;
 import net.azib.ipscan.IPScannerService;
 import net.azib.ipscan.core.ScanningResult;
 import org.springframework.stereotype.Component;
-import org.touchhome.bundle.api.BundleSettingPlugin;
+import org.touchhome.bundle.api.setting.BundleSettingPlugin;
 import org.touchhome.bundle.api.EntityContext;
 import org.touchhome.bundle.api.console.ConsolePlugin;
 import org.touchhome.bundle.api.model.HasEntityIdentifier;

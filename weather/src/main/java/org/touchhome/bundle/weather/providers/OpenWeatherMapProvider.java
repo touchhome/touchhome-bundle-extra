@@ -1,5 +1,6 @@
 package org.touchhome.bundle.weather.providers;
 
+import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.text.StringSubstitutor;
 import org.springframework.stereotype.Component;
@@ -9,6 +10,7 @@ import org.touchhome.bundle.weather.setting.WeatherLangSetting;
 import org.touchhome.bundle.weather.setting.WeatherUnitSetting;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -41,15 +43,30 @@ public class OpenWeatherMapProvider extends BaseWeatherProvider<OpenWeatherMapPr
         return "You has to acquire api key for provider<\br><a href='https://openweathermap.org/'>OpenWeather</a>";
     }
 
+    @Getter
     @Setter
     public static class WeatherJSON {
-        private Current current;
+        private WeatherStat current;
+        private Long lat;
+        private Long lon;
+        private Long timezone_offset;
+        private String timezone;
+        private List<WeatherStat> hourly;
 
+        @Getter
         @Setter
-        private static class Current {
+        private static class WeatherStat {
+            private Long dt;
             private Double temp;
             private Double pressure;
             private Double humidity;
+            private Double feels_like;
+            private Double clouds;
+            private Double visibility;
+            private Double wind_speed;
+            private Double wind_deg;
+            private Long sunrise;
+            private Long sunset;
         }
     }
 

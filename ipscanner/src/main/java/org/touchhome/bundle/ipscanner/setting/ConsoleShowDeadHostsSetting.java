@@ -1,6 +1,6 @@
 package org.touchhome.bundle.ipscanner.setting;
 
-import org.touchhome.bundle.api.BundleConsoleSettingPlugin;
+import org.touchhome.bundle.api.setting.BundleConsoleSettingPlugin;
 
 public class ConsoleShowDeadHostsSetting implements BundleConsoleSettingPlugin<Boolean> {
 

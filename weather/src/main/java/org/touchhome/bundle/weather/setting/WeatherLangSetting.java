@@ -1,6 +1,6 @@
 package org.touchhome.bundle.weather.setting;
 
-import org.touchhome.bundle.api.BundleSettingPlugin;
+import org.touchhome.bundle.api.setting.BundleSettingPlugin;
 
 public class WeatherLangSetting implements BundleSettingPlugin<String> {
 
