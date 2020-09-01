@@ -34,4 +34,9 @@ public class Nrf24i01RetryCountSetting implements BundleSettingPlugin<RetryCount
     public List<Option> loadAvailableValues(EntityContext entityContext) {
         return Option.list(RetryCount.class);
     }
+
+    @Override
+    public boolean isReverted() {
+        return true;
+    }
 }

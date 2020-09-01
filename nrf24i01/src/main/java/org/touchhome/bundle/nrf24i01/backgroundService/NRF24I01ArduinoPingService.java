@@ -15,8 +15,8 @@ import pl.grzeslowski.smarthome.rf24.helpers.Pipe;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.touchhome.bundle.nrf24i01.Nrf224i01Config.ARDUINO_MAX_MISSED_PINGS;
-import static org.touchhome.bundle.nrf24i01.Nrf224i01Config.ARDUINO_PING_INTERVAL;
+import static org.touchhome.bundle.nrf24i01.Nrf224i01Configuration.ARDUINO_MAX_MISSED_PINGS;
+import static org.touchhome.bundle.nrf24i01.Nrf224i01Configuration.ARDUINO_PING_INTERVAL;
 
 public class NRF24I01ArduinoPingService extends BackgroundProcessService<Void> {
 

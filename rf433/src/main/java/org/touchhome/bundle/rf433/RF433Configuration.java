@@ -5,6 +5,6 @@ import org.touchhome.bundle.api.BundleConfiguration;
 
 @Configuration
 @BundleConfiguration
-public class RF433Config {
+public class RF433Configuration {
 
 }

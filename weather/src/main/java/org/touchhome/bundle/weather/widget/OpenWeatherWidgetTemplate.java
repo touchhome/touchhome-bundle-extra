@@ -45,7 +45,7 @@ public class OpenWeatherWidgetTemplate implements WidgetJSBaseTemplate {
         String containerId = "cow-" + System.currentTimeMillis();
         javaScriptBuilder
                 .jsonParam("id", "15")
-                .jsonParam("city_name", TouchHomeUtils.getIpGeoLocation().getCity());
+                .jsonParam("city_name", TouchHomeUtils.getIpGeoLocation(TouchHomeUtils.getOuterIpAddress()).getCity());
 
         javaScriptBuilder.readyOnClient().window(window -> {
             window.array("myWidgetParam")

@@ -34,4 +34,9 @@ public class Nrf24i01CrcSizeSetting implements BundleSettingPlugin<CRCSize> {
     public List<Option> loadAvailableValues(EntityContext entityContext) {
         return Option.list(CRCSize.class);
     }
+
+    @Override
+    public boolean isReverted() {
+        return true;
+    }
 }

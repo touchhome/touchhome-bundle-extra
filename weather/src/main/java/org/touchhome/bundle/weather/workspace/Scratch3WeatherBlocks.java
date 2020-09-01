@@ -24,7 +24,7 @@ public class Scratch3WeatherBlocks extends Scratch3ExtensionBlocks {
     private final Scratch3Block pressureWeatherApi;
 
     public Scratch3WeatherBlocks(EntityContext entityContext, WeatherEntrypoint weatherEntrypoint) {
-        super("weather", "#3B798C", entityContext, weatherEntrypoint);
+        super("#3B798C", entityContext, weatherEntrypoint);
 
         this.weatherApi = Scratch3Block.ofEvaluate(4, "weather", BlockType.reporter, "Weather of city [CITY] (JSON)", this::readWeather);
         this.weatherApi.addArgument(CITY, ArgumentType.string);

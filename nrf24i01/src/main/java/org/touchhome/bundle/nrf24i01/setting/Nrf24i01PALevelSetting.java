@@ -34,4 +34,9 @@ public class Nrf24i01PALevelSetting implements BundleSettingPlugin<PALevel> {
     public List<Option> loadAvailableValues(EntityContext entityContext) {
         return Option.list(PALevel.class);
     }
+
+    @Override
+    public boolean isReverted() {
+        return true;
+    }
 }

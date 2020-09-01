@@ -38,4 +38,9 @@ public class ConsoleScannedPortsSetting implements BundleConsoleSettingPlugin<JS
                 null, getDefaultValue())
                 .setDescription("ipscanner_ports_description"));
     }
+
+    @Override
+    public boolean isReverted() {
+        return true;
+    }
 }

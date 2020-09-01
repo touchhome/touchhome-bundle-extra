@@ -34,4 +34,9 @@ public class Nrf24i01DataRateSetting implements BundleSettingPlugin<DataRate> {
     public List<Option> loadAvailableValues(EntityContext entityContext) {
         return Option.list(DataRate.class);
     }
+
+    @Override
+    public boolean isReverted() {
+        return true;
+    }
 }

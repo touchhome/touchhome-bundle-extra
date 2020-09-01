@@ -7,7 +7,7 @@ import org.touchhome.bundle.api.BundleConfiguration;
 
 @Configuration
 @BundleConfiguration
-public class IPScannerConfig {
+public class IPScannerConfiguration {
 
     @Bean
     public IPScannerService ipScannerService() {

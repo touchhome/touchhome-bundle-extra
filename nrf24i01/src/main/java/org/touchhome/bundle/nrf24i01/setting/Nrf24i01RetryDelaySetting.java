@@ -34,4 +34,9 @@ public class Nrf24i01RetryDelaySetting implements BundleSettingPlugin<RetryDelay
     public List<Option> loadAvailableValues(EntityContext entityContext) {
         return Option.list(RetryDelay.class);
     }
+
+    @Override
+    public boolean isReverted() {
+        return true;
+    }
 }

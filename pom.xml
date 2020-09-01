@@ -28,6 +28,7 @@
         <module>nrf24i01</module>
         <module>weather</module>
         <module>ipscanner</module>
+        <module>mqtt-client</module>
     </modules>
 
     <properties>
@@ -129,6 +130,12 @@
                                 <goal>single</goal>
                             </goals>
                             <configuration>
+                                <archive>
+                                    <manifestEntries>
+                                        <groupId>${project.groupId}</groupId>
+                                        <artifactId>${project.artifactId}</artifactId>
+                                    </manifestEntries>
+                                </archive>
                                 <descriptorRefs>
                                     <descriptorRef>jar-with-dependencies</descriptorRef>
                                 </descriptorRefs>

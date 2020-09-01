@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @Configuration
 @BundleConfiguration
-public class Nrf224i01Config {
+public class Nrf224i01Configuration {
 
     public static final int ARDUINO_MAX_MISSED_PINGS = 5;
     public static final int ARDUINO_PING_INTERVAL = 120000;

@@ -1,0 +1,31 @@
+{
+  "mqtt-client": {
+    "name": "MQTT Client",
+    "extensionDescription": "MQTT Client extension",
+    "setting": {
+      "label": "MQTT settings",
+      "description": "MQTT is a machine-to-machine (M2M)/'Internet of Things' connectivity protocol. It was designed as an extremely lightweight publish/subscribe messaging transport.",
+      "st_MQTTPortSetting": "Port",
+      "st_MQTTPortSetting_description": "The optional port of the MQTT broker. If none is provided, the typical ports 1883 and 8883 (SSL) are used.",
+      "st_MQTTHostSetting": "Host address",
+      "st_MQTTHostSetting_description": "The IP/Hostname of the MQTT broker",
+      "st_MQTTAutomaticReconnectSetting": "Automatic reconnect",
+      "st_MQTTAutomaticReconnectSetting_description": "Enable/Disable automatic reconnect to MQTT server after lost connection",
+      "st_MQTTCleanSessionOnConnectSetting": "Clean session on connect",
+      "st_MQTTClientIDSetting": "Client ID",
+      "st_MQTTClientIDSetting_description": "Use a fixed client ID. Defaults to empty which means a user ID is generated for this connection",
+      "st_MQTTReconnectTimeSetting": "Reconnect timeout",
+      "st_MQTTReconnectTimeSetting_description": "Reconnect time in ms. If a connection is lost, the app will wait this time before it tries to reconnect. Defaults to 60000 (60s).",
+      "st_MQTTKeepAliveSetting": "Keep alive interval",
+      "st_MQTTKeepAliveSetting_description": "Keep alive / heartbeat timer in s. It can take up to this time to determine if a server connection is lost. A lower value may keep the broker unnecessarily busy for no or little additional value.",
+      "st_MQTTUsernameSetting": "MQTT username",
+      "st_MQTTUsernameSetting_description": "The MQTT username (since MQTT 3.1). Defaults to empty.",
+      "st_MQTTPasswordSetting": "MQTT password",
+      "st_MQTTPasswordSetting_description": "The MQTT password (since MQTT 3.1). Defaults to empty.",
+      "st_MQTTReconnectSetting": "Reconnect to MQTT server",
+      "st_MQTTStatusSetting": "MQTT connection status",
+      "st_MQTTConnectionTimeoutSetting": "Connection timeout",
+      "st_MQTTConnectionTimeoutSetting_description": "Connection timeout"
+    }
+  }
+}
