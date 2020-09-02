@@ -1,14 +1,14 @@
-package org.touchhome.bundle.nrf24i01.setting;
+package org.touchhome.bundle.nrf24i01.setting.advanced;
 
 import org.apache.commons.lang3.StringUtils;
 import org.touchhome.bundle.api.setting.BundleSettingPlugin;
 import org.touchhome.bundle.api.EntityContext;
 import org.touchhome.bundle.api.json.Option;
-import org.touchhome.bundle.nrf24i01.options.PALevel;
+import org.touchhome.bundle.nrf24i01.options.RetryCount;
 
 import java.util.List;
 
-public class Nrf24i01PALevelSetting implements BundleSettingPlugin<PALevel> {
+public class Nrf24i01RetryCountSetting implements BundleSettingPlugin<RetryCount> {
 
     @Override
     public SettingType getSettingType() {
@@ -17,26 +17,31 @@ public class Nrf24i01PALevelSetting implements BundleSettingPlugin<PALevel> {
 
     @Override
     public int order() {
-        return 30;
+        return 40;
     }
 
     @Override
-    public PALevel parseValue(EntityContext entityContext, String value) {
-        return StringUtils.isEmpty(value) ? null : PALevel.valueOf(value);
+    public RetryCount parseValue(EntityContext entityContext, String value) {
+        return StringUtils.isEmpty(value) ? null : RetryCount.valueOf(value);
     }
 
     @Override
     public String getDefaultValue() {
-        return PALevel.RF24_PA_MIN.name();
+        return RetryCount.RETRY_15.name();
     }
 
     @Override
     public List<Option> loadAvailableValues(EntityContext entityContext) {
-        return Option.list(PALevel.class);
+        return Option.list(RetryCount.class);
     }
 
     @Override
     public boolean isReverted() {
+        return true;
+    }
+
+    @Override
+    public boolean isAdvanced() {
         return true;
     }
 }

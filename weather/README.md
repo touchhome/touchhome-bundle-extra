@@ -1,5 +1,8 @@
 ## Weather bundle
 
+##### Description
+Weather extension for loading weather data using cloud api
+
 Weather bundle includes:
  1. Workspace extension for loading weather from providers
  2. Weather widget

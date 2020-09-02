@@ -1,14 +1,14 @@
-package org.touchhome.bundle.nrf24i01.setting;
+package org.touchhome.bundle.nrf24i01.setting.advanced;
 
 import org.apache.commons.lang3.StringUtils;
 import org.touchhome.bundle.api.setting.BundleSettingPlugin;
 import org.touchhome.bundle.api.EntityContext;
 import org.touchhome.bundle.api.json.Option;
-import org.touchhome.bundle.nrf24i01.options.CRCSize;
+import org.touchhome.bundle.nrf24i01.options.PALevel;
 
 import java.util.List;
 
-public class Nrf24i01CrcSizeSetting implements BundleSettingPlugin<CRCSize> {
+public class Nrf24i01PALevelSetting implements BundleSettingPlugin<PALevel> {
 
     @Override
     public SettingType getSettingType() {
@@ -17,26 +17,31 @@ public class Nrf24i01CrcSizeSetting implements BundleSettingPlugin<CRCSize> {
 
     @Override
     public int order() {
-        return 10;
+        return 30;
     }
 
     @Override
-    public CRCSize parseValue(EntityContext entityContext, String value) {
-        return StringUtils.isEmpty(value) ? null : CRCSize.valueOf(value);
+    public PALevel parseValue(EntityContext entityContext, String value) {
+        return StringUtils.isEmpty(value) ? null : PALevel.valueOf(value);
     }
 
     @Override
     public String getDefaultValue() {
-        return CRCSize.ENABLE_8_BITS.name();
+        return PALevel.RF24_PA_MIN.name();
     }
 
     @Override
     public List<Option> loadAvailableValues(EntityContext entityContext) {
-        return Option.list(CRCSize.class);
+        return Option.list(PALevel.class);
     }
 
     @Override
     public boolean isReverted() {
+        return true;
+    }
+
+    @Override
+    public boolean isAdvanced() {
         return true;
     }
 }

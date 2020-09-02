@@ -1,4 +1,4 @@
-package org.touchhome.bundle.googleDrive;
+package org.touchhome.bundle.drive;
 
 import org.springframework.context.annotation.Configuration;
 import org.touchhome.bundle.api.BundleConfiguration;

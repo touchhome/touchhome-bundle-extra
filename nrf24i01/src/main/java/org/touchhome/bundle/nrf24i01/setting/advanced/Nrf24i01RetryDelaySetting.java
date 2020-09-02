@@ -1,14 +1,14 @@
-package org.touchhome.bundle.nrf24i01.setting;
+package org.touchhome.bundle.nrf24i01.setting.advanced;
 
 import org.apache.commons.lang3.StringUtils;
 import org.touchhome.bundle.api.setting.BundleSettingPlugin;
 import org.touchhome.bundle.api.EntityContext;
 import org.touchhome.bundle.api.json.Option;
-import org.touchhome.bundle.nrf24i01.options.DataRate;
+import org.touchhome.bundle.nrf24i01.options.RetryDelay;
 
 import java.util.List;
 
-public class Nrf24i01DataRateSetting implements BundleSettingPlugin<DataRate> {
+public class Nrf24i01RetryDelaySetting implements BundleSettingPlugin<RetryDelay> {
 
     @Override
     public SettingType getSettingType() {
@@ -17,26 +17,31 @@ public class Nrf24i01DataRateSetting implements BundleSettingPlugin<DataRate> {
 
     @Override
     public int order() {
-        return 20;
+        return 50;
     }
 
     @Override
-    public DataRate parseValue(EntityContext entityContext, String value) {
-        return StringUtils.isEmpty(value) ? null : DataRate.valueOf(value);
+    public RetryDelay parseValue(EntityContext entityContext, String value) {
+        return StringUtils.isEmpty(value) ? null : RetryDelay.valueOf(value);
     }
 
     @Override
     public String getDefaultValue() {
-        return DataRate.RF24_250KBPS.name();
+        return RetryDelay.DELAY_15.name();
     }
 
     @Override
     public List<Option> loadAvailableValues(EntityContext entityContext) {
-        return Option.list(DataRate.class);
+        return Option.list(RetryDelay.class);
     }
 
     @Override
     public boolean isReverted() {
+        return true;
+    }
+
+    @Override
+    public boolean isAdvanced() {
         return true;
     }
 }

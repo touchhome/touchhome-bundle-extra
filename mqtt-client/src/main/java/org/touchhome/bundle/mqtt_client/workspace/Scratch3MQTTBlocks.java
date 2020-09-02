@@ -31,7 +31,7 @@ public class Scratch3MQTTBlocks extends Scratch3ExtensionBlocks {
     private final Scratch3Block subscribeToAnything;
 
     public Scratch3MQTTBlocks(EntityContext entityContext, MQTTEntrypoint mqttEntrypoint, BroadcastLockManager broadcastLockManager) {
-        super("#6D2A61", entityContext, mqttEntrypoint);
+        super("#7D713E", entityContext, mqttEntrypoint);
         this.mqttEntrypoint = mqttEntrypoint;
         this.broadcastLockManager = broadcastLockManager;
 
@@ -52,7 +52,7 @@ public class Scratch3MQTTBlocks extends Scratch3ExtensionBlocks {
         this.subscribeToValue.addArgument(PAYLOAD, ArgumentType.string);
 
         this.publish = Scratch3Block.ofHandler(40, "publish", BlockType.command,
-                "Publish payload [PAYLOAD] to topic [TOPIC] (Level: [LEVEL], Retained: [RETAINED]", this::publish);
+                "Publish payload [PAYLOAD] to topic [TOPIC] | Level: [LEVEL], Retained: [RETAINED]", this::publish);
         this.publish.addArgument(TOPIC, ArgumentType.string);
         this.publish.addArgument(PAYLOAD, ArgumentType.string);
         this.publish.addArgument(LEVEL, ArgumentType.string, QoSLevel.AtMostOnce.name(), this.publishLevelMenu);

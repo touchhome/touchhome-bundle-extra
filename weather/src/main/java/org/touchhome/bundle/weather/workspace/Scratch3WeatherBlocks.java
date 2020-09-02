@@ -6,7 +6,7 @@ import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 import org.touchhome.bundle.api.EntityContext;
 import org.touchhome.bundle.api.scratch.*;
-import org.touchhome.bundle.weather.WeatherEntrypoint;
+import org.touchhome.bundle.weather.WeatherBundleEntrypoint;
 import org.touchhome.bundle.weather.setting.WeatherProviderSetting;
 
 @Getter
@@ -23,8 +23,8 @@ public class Scratch3WeatherBlocks extends Scratch3ExtensionBlocks {
     private final Scratch3Block humidityWeatherApi;
     private final Scratch3Block pressureWeatherApi;
 
-    public Scratch3WeatherBlocks(EntityContext entityContext, WeatherEntrypoint weatherEntrypoint) {
-        super("#3B798C", entityContext, weatherEntrypoint);
+    public Scratch3WeatherBlocks(EntityContext entityContext, WeatherBundleEntrypoint weatherBundleEntrypoint) {
+        super("#3B798C", entityContext, weatherBundleEntrypoint);
 
         this.weatherApi = Scratch3Block.ofEvaluate(4, "weather", BlockType.reporter, "Weather of city [CITY] (JSON)", this::readWeather);
         this.weatherApi.addArgument(CITY, ArgumentType.string);

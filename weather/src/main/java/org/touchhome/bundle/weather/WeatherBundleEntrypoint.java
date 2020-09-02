@@ -8,7 +8,7 @@ import org.touchhome.bundle.api.BundleEntrypoint;
 @Log4j2
 @Component
 @RequiredArgsConstructor
-public class WeatherEntrypoint implements BundleEntrypoint {
+public class WeatherBundleEntrypoint implements BundleEntrypoint {
 
     @Override
     public void init() {

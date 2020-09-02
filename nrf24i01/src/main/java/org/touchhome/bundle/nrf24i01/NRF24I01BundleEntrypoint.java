@@ -18,7 +18,6 @@ import org.touchhome.bundle.nrf24i01.communication.ReadListener;
 import org.touchhome.bundle.nrf24i01.communication.Rf24Communicator;
 import org.touchhome.bundle.nrf24i01.communication.SendCommand;
 import org.touchhome.bundle.nrf24i01.options.*;
-import org.touchhome.bundle.nrf24i01.options.*;
 import org.touchhome.bundle.nrf24i01.setting.Nrf24i01EnableButtonsSetting;
 import org.touchhome.bundle.nrf24i01.setting.Nrf24i01StatusMessageSetting;
 import org.touchhome.bundle.nrf24i01.setting.Nrf24i01StatusSetting;
@@ -32,7 +31,7 @@ import static org.touchhome.bundle.api.util.RaspberryGpioPin.*;
 @Log4j2
 @Component
 @RequiredArgsConstructor
-public class NRF24I01Bundle implements BundleEntrypoint {
+public class NRF24I01BundleEntrypoint implements BundleEntrypoint {
     private static final Pipe GLOBAL_WRITE_PIPE = new Pipe("2Node");
     private static byte messageID = 0;
     private static String errorLoadingLibrary = null;
@@ -280,9 +279,8 @@ public class NRF24I01Bundle implements BundleEntrypoint {
     public Set<NotificationEntityJSON> getNotifications() {
         DeviceStatus deviceStatus = entityContext.getSettingValue(Nrf24i01StatusSetting.class);
         return Collections.singleton(new NotificationEntityJSON("nrf24i01-status")
-                .setName("NRF24I01 status")
-                .setDescription(entityContext.getSettingValue(Nrf24i01StatusMessageSetting.class))
-                .setNotificationType(deviceStatus == DeviceStatus.ONLINE ? NotificationType.info : NotificationType.warning));
+                .setName("NRF24I01: " + entityContext.getSettingValue(Nrf24i01StatusMessageSetting.class))
+                .setNotificationType(deviceStatus == DeviceStatus.ONLINE ? NotificationType.success : NotificationType.danger));
     }
 }
 

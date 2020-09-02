@@ -16,7 +16,7 @@ import org.touchhome.bundle.ipscanner.setting.IpScannerHeaderStopButtonSetting;
 @Log4j2
 @Component
 @RequiredArgsConstructor
-public class IPScannerBundle implements BundleEntrypoint {
+public class IPScannerBundleEntrypoint implements BundleEntrypoint {
 
     private final EntityContext entityContext;
     private final IPScannerService ipScannerService;

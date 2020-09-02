@@ -2,7 +2,7 @@ package org.touchhome.bundle.nrf24i01.backgroundService;
 
 import org.touchhome.bundle.api.EntityContext;
 import org.touchhome.bundle.api.thread.BackgroundProcessService;
-import org.touchhome.bundle.nrf24i01.NRF24I01Bundle;
+import org.touchhome.bundle.nrf24i01.NRF24I01BundleEntrypoint;
 import org.touchhome.bundle.nrf24i01.command.RF24CommandPlugin;
 import org.touchhome.bundle.nrf24i01.communication.RF24Message;
 import org.touchhome.bundle.nrf24i01.communication.ReadListener;
@@ -21,12 +21,12 @@ import static org.touchhome.bundle.nrf24i01.Command.SET_PIN_VALUE_ON_HANDLER_REQ
  */
 public class NRF24I01DevicesListener extends BackgroundProcessService<Void> {
 
-    private final NRF24I01Bundle rf24Service;
+    private final NRF24I01BundleEntrypoint rf24Service;
     private final Map<Byte, RF24CommandPlugin> rf24CommandPlugins;
 
     public NRF24I01DevicesListener(EntityContext entityContext) {
         super(NRF24I01DevicesListener.class.getSimpleName(), entityContext);
-        rf24Service = entityContext.getBean(NRF24I01Bundle.class);
+        rf24Service = entityContext.getBean(NRF24I01BundleEntrypoint.class);
         rf24CommandPlugins = entityContext.getBean("rf24CommandPlugins", Map.class);
 
         if (EntityContext.isDevEnvironment()) {

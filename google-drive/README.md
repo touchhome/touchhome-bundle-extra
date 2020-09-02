@@ -1,5 +1,7 @@
 ## Google drive bundle
-Not ready
 
-Features:
-- Save/Read files from google drive
+### Description:
+Google Drive cloud storage 
+
+##### Google Drive bundle includes:
+ 1. Workspace extension for save/load files

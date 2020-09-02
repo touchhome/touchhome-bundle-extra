@@ -1,14 +1,14 @@
-package org.touchhome.bundle.nrf24i01.setting;
+package org.touchhome.bundle.nrf24i01.setting.advanced;
 
 import org.apache.commons.lang3.StringUtils;
 import org.touchhome.bundle.api.setting.BundleSettingPlugin;
 import org.touchhome.bundle.api.EntityContext;
 import org.touchhome.bundle.api.json.Option;
-import org.touchhome.bundle.nrf24i01.options.RetryCount;
+import org.touchhome.bundle.nrf24i01.options.CRCSize;
 
 import java.util.List;
 
-public class Nrf24i01RetryCountSetting implements BundleSettingPlugin<RetryCount> {
+public class Nrf24i01CrcSizeSetting implements BundleSettingPlugin<CRCSize> {
 
     @Override
     public SettingType getSettingType() {
@@ -17,26 +17,31 @@ public class Nrf24i01RetryCountSetting implements BundleSettingPlugin<RetryCount
 
     @Override
     public int order() {
-        return 40;
+        return 10;
     }
 
     @Override
-    public RetryCount parseValue(EntityContext entityContext, String value) {
-        return StringUtils.isEmpty(value) ? null : RetryCount.valueOf(value);
+    public CRCSize parseValue(EntityContext entityContext, String value) {
+        return StringUtils.isEmpty(value) ? null : CRCSize.valueOf(value);
     }
 
     @Override
     public String getDefaultValue() {
-        return RetryCount.RETRY_15.name();
+        return CRCSize.ENABLE_8_BITS.name();
     }
 
     @Override
     public List<Option> loadAvailableValues(EntityContext entityContext) {
-        return Option.list(RetryCount.class);
+        return Option.list(CRCSize.class);
     }
 
     @Override
     public boolean isReverted() {
+        return true;
+    }
+
+    @Override
+    public boolean isAdvanced() {
         return true;
     }
 }

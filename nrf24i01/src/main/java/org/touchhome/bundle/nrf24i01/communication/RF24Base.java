@@ -7,6 +7,7 @@ import org.touchhome.bundle.api.model.DeviceStatus;
 import org.touchhome.bundle.api.util.TouchHomeUtils;
 import org.touchhome.bundle.nrf24i01.Command;
 import org.touchhome.bundle.nrf24i01.setting.*;
+import org.touchhome.bundle.nrf24i01.setting.advanced.*;
 import pl.grzeslowski.smarthome.rf24.exceptions.CloseRf24Exception;
 import pl.grzeslowski.smarthome.rf24.exceptions.WriteRf24Exception;
 import pl.grzeslowski.smarthome.rf24.generated.RF24;
