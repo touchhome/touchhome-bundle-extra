@@ -4,7 +4,6 @@ import lombok.Getter;
 import org.springframework.stereotype.Component;
 import org.touchhome.bundle.api.EntityContext;
 import org.touchhome.bundle.api.scratch.*;
-import org.touchhome.bundle.api.workspace.BroadcastLockManager;
 
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
@@ -12,7 +11,6 @@ import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 @Component
 public class Scratch3GoogleDriveBlocks extends Scratch3ExtensionBlocks {
 
-    private final BroadcastLockManager broadcastLockManager;
     private final GoogleDriveEntrypoint googleDriveEntrypoint;
 
     private final MenuBlock.ServerMenuBlock filesMenu;
@@ -20,9 +18,8 @@ public class Scratch3GoogleDriveBlocks extends Scratch3ExtensionBlocks {
     private final Scratch3Block sendFile;
     private final Scratch3Block getFileContent;
 
-    public Scratch3GoogleDriveBlocks(EntityContext entityContext, BroadcastLockManager broadcastLockManager, GoogleDriveEntrypoint googleDriveEntrypoint) {
-        super("#51633C", entityContext, null, "drive");
-        this.broadcastLockManager = broadcastLockManager;
+    public Scratch3GoogleDriveBlocks(EntityContext entityContext, GoogleDriveEntrypoint googleDriveEntrypoint) {
+        super("#51633C", entityContext, googleDriveEntrypoint);
         this.googleDriveEntrypoint = googleDriveEntrypoint;
 
         // menu

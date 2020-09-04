@@ -29,6 +29,7 @@
         <module>weather</module>
         <module>ipscanner</module>
         <module>mqtt-client</module>
+        <module>dropbox</module>
     </modules>
 
     <properties>

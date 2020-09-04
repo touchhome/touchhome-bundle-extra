@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.touchhome.bundle.api.BundleEntrypoint;
 import org.touchhome.bundle.api.EntityContext;
-import org.touchhome.bundle.api.json.NotificationEntityJSON;
-import org.touchhome.bundle.api.model.DeviceStatus;
-import org.touchhome.bundle.api.util.NotificationType;
+import org.touchhome.bundle.api.setting.BundleSettingPluginStatus;
 import org.touchhome.bundle.api.util.RaspberryGpioPin;
 import org.touchhome.bundle.api.util.TouchHomeUtils;
 import org.touchhome.bundle.arduino.model.ArduinoDeviceEntity;
@@ -19,12 +17,8 @@ import org.touchhome.bundle.nrf24i01.communication.Rf24Communicator;
 import org.touchhome.bundle.nrf24i01.communication.SendCommand;
 import org.touchhome.bundle.nrf24i01.options.*;
 import org.touchhome.bundle.nrf24i01.setting.Nrf24i01EnableButtonsSetting;
-import org.touchhome.bundle.nrf24i01.setting.Nrf24i01StatusMessageSetting;
 import org.touchhome.bundle.nrf24i01.setting.Nrf24i01StatusSetting;
 import pl.grzeslowski.smarthome.rf24.helpers.Pipe;
-
-import java.util.Collections;
-import java.util.Set;
 
 import static org.touchhome.bundle.api.util.RaspberryGpioPin.*;
 
@@ -61,9 +55,7 @@ public class NRF24I01BundleEntrypoint implements BundleEntrypoint {
                 System.load(TouchHomeUtils.getFilesPath().resolve("nrf24i01/librf24bcmjava.so").toAbsolutePath().toString());
             } catch (Throwable ex) {
                 log.error("Error while load nrf24i01 library");
-                errorLoadingLibrary = TouchHomeUtils.getErrorMessage(ex);
-                entityContext.setSettingValue(Nrf24i01StatusMessageSetting.class, errorLoadingLibrary);
-                entityContext.setSettingValue(Nrf24i01StatusSetting.class, DeviceStatus.OFFLINE);
+                entityContext.setSettingValue(Nrf24i01StatusSetting.class, BundleSettingPluginStatus.error(ex));
             }
         }
     }
@@ -276,11 +268,8 @@ public class NRF24I01BundleEntrypoint implements BundleEntrypoint {
         scheduleSend(sendCommand, sendMessage, new Pipe(arduinoDeviceEntity.getPipe()));
     }*/
     @Override
-    public Set<NotificationEntityJSON> getNotifications() {
-        DeviceStatus deviceStatus = entityContext.getSettingValue(Nrf24i01StatusSetting.class);
-        return Collections.singleton(new NotificationEntityJSON("nrf24i01-status")
-                .setName("NRF24I01: " + entityContext.getSettingValue(Nrf24i01StatusMessageSetting.class))
-                .setNotificationType(deviceStatus == DeviceStatus.ONLINE ? NotificationType.success : NotificationType.danger));
+    public Class<? extends BundleSettingPluginStatus> getBundleStatusSetting() {
+        return Nrf24i01StatusSetting.class;
     }
 }
 

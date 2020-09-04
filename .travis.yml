@@ -3,54 +3,61 @@ jdk: openjdk8
 install: mvn clean install -B -V
 cache:
   directories:
-  - $HOME/.m2
+    - $HOME/.m2
 deploy:
-- provider: bintray
-  skip_cleanup: true
-  user: $BINTRAY_USER
-  key:  $BINTRAY_KEY
-  file: 'google-drive/target/bintray.json'
-  on:
-    tags: true
-- provider: bintray
-  skip_cleanup: true
-  user: $BINTRAY_USER
-  key:  $BINTRAY_KEY
-  file: 'nrf24i01/target/bintray.json'
-  on:
-    tags: true
-- provider: bintray
-  skip_cleanup: true
-  user: $BINTRAY_USER
-  key:  $BINTRAY_KEY
-  file: 'rf433/target/bintray.json'
-  on:
-    tags: true
-- provider: bintray
-  skip_cleanup: true
-  user: $BINTRAY_USER
-  key:  $BINTRAY_KEY
-  file: 'ipscanner/target/bintray.json'
-  on:
-    tags: true
-- provider: bintray
-  skip_cleanup: true
-  user: $BINTRAY_USER
-  key:  $BINTRAY_KEY
-  file: 'weather/target/bintray.json'
-  on:
-    tags: true
-- provider: bintray
-  skip_cleanup: true
-  user: $BINTRAY_USER
-  key:  $BINTRAY_KEY
-  file: 'mqtt-client/target/bintray.json'
-  on:
-    tags: true
-- provider: bintray
-  skip_cleanup: true
-  user: $BINTRAY_USER
-  key:  $BINTRAY_KEY
-  file: 'target/bintray.json'
-  on:
-    tags: true
+  - provider: bintray
+    skip_cleanup: true
+    user: $BINTRAY_USER
+    key:  $BINTRAY_KEY
+    file: 'google-drive/target/bintray.json'
+    on:
+      tags: true
+  - provider: bintray
+    skip_cleanup: true
+    user: $BINTRAY_USER
+    key:  $BINTRAY_KEY
+    file: 'nrf24i01/target/bintray.json'
+    on:
+      tags: true
+  - provider: bintray
+    skip_cleanup: true
+    user: $BINTRAY_USER
+    key:  $BINTRAY_KEY
+    file: 'rf433/target/bintray.json'
+    on:
+      tags: true
+  - provider: bintray
+    skip_cleanup: true
+    user: $BINTRAY_USER
+    key:  $BINTRAY_KEY
+    file: 'ipscanner/target/bintray.json'
+    on:
+      tags: true
+  - provider: bintray
+    skip_cleanup: true
+    user: $BINTRAY_USER
+    key:  $BINTRAY_KEY
+    file: 'weather/target/bintray.json'
+    on:
+      tags: true
+  - provider: bintray
+    skip_cleanup: true
+    user: $BINTRAY_USER
+    key:  $BINTRAY_KEY
+    file: 'mqtt-client/target/bintray.json'
+    on:
+      tags: true
+  - provider: bintray
+    skip_cleanup: true
+    user: $BINTRAY_USER
+    key:  $BINTRAY_KEY
+    file: 'dropbox/target/bintray.json'
+    on:
+      tags: true
+  - provider: bintray
+    skip_cleanup: true
+    user: $BINTRAY_USER
+    key:  $BINTRAY_KEY
+    file: 'target/bintray.json'
+    on:
+      tags: true

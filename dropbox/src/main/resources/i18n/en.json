@@ -1,0 +1,13 @@
+{
+  "dropbox": {
+    "name": "Dropbox",
+    "extensionDescription": "Dropbox extension",
+    "setting": {
+      "label": "Dropbox settings",
+      "description": "Dropbox bundle require Access Token. First you need create Dropbox 'app' <a target='_blank' href='https://www.dropbox.com/developers/apps/create'>Create app</a>. Select 'Scoped access', type access - full, type any app name. After app created go to permissions and set all checkboxes under 'Files and folders' section. Select 'Access token expiration' - No expiration, then press 'Generated access token' to obtain access token",
+      "st_DropboxApiTokenSetting": "Restart api token",
+      "st_DropboxRestartButtonSetting": "Restart Dropbox",
+      "st_DropboxStatusSetting": "Dropbox status"
+    }
+  }
+}

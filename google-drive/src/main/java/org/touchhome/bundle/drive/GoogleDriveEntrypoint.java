@@ -6,21 +6,14 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 import org.touchhome.bundle.api.BundleEntrypoint;
 import org.touchhome.bundle.api.EntityContext;
-import org.touchhome.bundle.api.json.NotificationEntityJSON;
-import org.touchhome.bundle.api.util.NotificationType;
-import org.touchhome.bundle.api.util.TouchHomeUtils;
+import org.touchhome.bundle.api.setting.BundleSettingPluginStatus;
 import org.touchhome.bundle.drive.setting.GoogleDriveRestartButtonSetting;
 import org.touchhome.bundle.drive.setting.GoogleDriveStatusSetting;
-
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 
 @Log4j2
 @Component
 @RequiredArgsConstructor
 public class GoogleDriveEntrypoint implements BundleEntrypoint {
-    private static final String CONNECTED = "Connected.";
 
     @Getter
     private final GoogleDriveFileSystem googleDriveFileSystem;
@@ -28,17 +21,17 @@ public class GoogleDriveEntrypoint implements BundleEntrypoint {
 
     @Override
     public void init() {
-        checkGoogleDriveAccess();
-        entityContext.listenSettingValue(GoogleDriveRestartButtonSetting.class, this::checkGoogleDriveAccess);
+        restart();
+        entityContext.listenSettingValue(GoogleDriveRestartButtonSetting.class, this::restart);
     }
 
-    private void checkGoogleDriveAccess() {
+    private void restart() {
         try {
             googleDriveFileSystem.invalidate();
             googleDriveFileSystem.getFileByName("root");
-            entityContext.setSettingValue(GoogleDriveStatusSetting.class, CONNECTED);
+            entityContext.setSettingValue(GoogleDriveStatusSetting.class, BundleSettingPluginStatus.ONLINE);
         } catch (Exception ex) {
-            entityContext.setSettingValue(GoogleDriveStatusSetting.class, TouchHomeUtils.getErrorMessage(ex));
+            entityContext.setSettingValue(GoogleDriveStatusSetting.class, BundleSettingPluginStatus.error(ex));
         }
     }
 
@@ -58,10 +51,7 @@ public class GoogleDriveEntrypoint implements BundleEntrypoint {
     }
 
     @Override
-    public Set<NotificationEntityJSON> getNotifications() {
-        String value = entityContext.getSettingValue(GoogleDriveStatusSetting.class);
-        return new HashSet<>(Collections.singletonList(new NotificationEntityJSON("drive-status")
-                .setNotificationType(!value.equals(CONNECTED) ? NotificationType.danger : NotificationType.success)
-                .setName("Google Drive: " + value)));
+    public Class<? extends BundleSettingPluginStatus> getBundleStatusSetting() {
+        return GoogleDriveStatusSetting.class;
     }
 }
