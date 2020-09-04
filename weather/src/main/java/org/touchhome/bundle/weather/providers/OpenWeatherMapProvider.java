@@ -43,6 +43,18 @@ public class OpenWeatherMapProvider extends BaseWeatherProvider<OpenWeatherMapPr
         return "You has to acquire api key for provider<\br><a href='https://openweathermap.org/'>OpenWeather</a>";
     }
 
+    @Override
+    protected StringSubstitutor buildWeatherRequest(String city, String latt, String longt) {
+        Map<String, String> valuesMap = new HashMap<>();
+
+        valuesMap.put("lat", latt);
+        valuesMap.put("lon", longt);
+        valuesMap.put("unit", entityContext.getSettingValue(WeatherUnitSetting.class).name());
+        valuesMap.put("key", entityContext.getSettingValue(WeatherApiKeySetting.class));
+        valuesMap.put("lang", entityContext.getSettingValue(WeatherLangSetting.class));
+        return new StringSubstitutor(valuesMap);
+    }
+
     @Getter
     @Setter
     public static class WeatherJSON {
@@ -68,17 +80,5 @@ public class OpenWeatherMapProvider extends BaseWeatherProvider<OpenWeatherMapPr
             private Long sunrise;
             private Long sunset;
         }
-    }
-
-    @Override
-    protected StringSubstitutor buildWeatherRequest(String city, String latt, String longt) {
-        Map<String, String> valuesMap = new HashMap<>();
-
-        valuesMap.put("lat", latt);
-        valuesMap.put("lon", longt);
-        valuesMap.put("unit", entityContext.getSettingValue(WeatherUnitSetting.class).name());
-        valuesMap.put("key", entityContext.getSettingValue(WeatherApiKeySetting.class));
-        valuesMap.put("lang", entityContext.getSettingValue(WeatherLangSetting.class));
-        return new StringSubstitutor(valuesMap);
     }
 }

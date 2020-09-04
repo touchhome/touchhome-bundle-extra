@@ -1,9 +1,9 @@
 package org.touchhome.bundle.nrf24i01.setting.advanced;
 
 import org.apache.commons.lang3.StringUtils;
-import org.touchhome.bundle.api.setting.BundleSettingPlugin;
 import org.touchhome.bundle.api.EntityContext;
 import org.touchhome.bundle.api.json.Option;
+import org.touchhome.bundle.api.setting.BundleSettingPlugin;
 import org.touchhome.bundle.nrf24i01.options.CRCSize;
 
 import java.util.List;

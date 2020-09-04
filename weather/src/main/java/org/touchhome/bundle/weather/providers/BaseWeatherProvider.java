@@ -10,10 +10,10 @@ import org.touchhome.bundle.weather.WeatherProvider;
 @RequiredArgsConstructor
 public abstract class BaseWeatherProvider<T> implements WeatherProvider<T>, HasDescription {
 
-    private T data;
-    private long lastRequestTimeout;
     private final Class<T> weatherJSONType;
     private final String url;
+    private T data;
+    private long lastRequestTimeout;
 
     /**
      * Read from weather provider not ofter than one minute

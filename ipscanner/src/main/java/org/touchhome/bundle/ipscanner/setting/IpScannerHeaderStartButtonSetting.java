@@ -1,7 +1,7 @@
 package org.touchhome.bundle.ipscanner.setting;
 
-import org.touchhome.bundle.api.setting.BundleSettingPluginButton;
 import org.touchhome.bundle.api.EntityContext;
+import org.touchhome.bundle.api.setting.BundleSettingPluginButton;
 
 import java.util.Arrays;
 import java.util.List;

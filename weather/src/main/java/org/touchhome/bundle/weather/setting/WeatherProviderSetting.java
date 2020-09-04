@@ -1,11 +1,11 @@
 package org.touchhome.bundle.weather.setting;
 
-import org.touchhome.bundle.api.setting.BundleSettingPlugin;
 import org.touchhome.bundle.api.EntityContext;
 import org.touchhome.bundle.api.exception.NotFoundException;
 import org.touchhome.bundle.api.json.Option;
-import org.touchhome.bundle.weather.providers.OpenWeatherMapProvider;
+import org.touchhome.bundle.api.setting.BundleSettingPlugin;
 import org.touchhome.bundle.weather.WeatherProvider;
+import org.touchhome.bundle.weather.providers.OpenWeatherMapProvider;
 
 import java.util.List;
 

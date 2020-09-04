@@ -6,9 +6,9 @@ import org.springframework.stereotype.Component;
 import org.touchhome.bundle.api.EntityContext;
 import org.touchhome.bundle.arduino.model.ArduinoDeviceEntity;
 import org.touchhome.bundle.arduino.repository.ArduinoDeviceRepository;
+import org.touchhome.bundle.nrf24i01.Command;
 import org.touchhome.bundle.nrf24i01.communication.RF24Message;
 import org.touchhome.bundle.nrf24i01.communication.SendCommand;
-import org.touchhome.bundle.nrf24i01.Command;
 import pl.grzeslowski.smarthome.rf24.helpers.Pipe;
 
 import static org.touchhome.bundle.nrf24i01.Command.REGISTER_COMMAND;

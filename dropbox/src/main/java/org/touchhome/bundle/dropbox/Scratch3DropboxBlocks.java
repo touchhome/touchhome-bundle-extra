@@ -25,7 +25,7 @@ public class Scratch3DropboxBlocks extends Scratch3ExtensionBlocks {
     private final Scratch3Block deleteFile;
 
     public Scratch3DropboxBlocks(EntityContext entityContext, DropboxEntrypoint dropboxEntrypoint) {
-        super("#51633C", entityContext, null, "dropbox");
+        super("#355279", entityContext, dropboxEntrypoint);
         this.dropboxEntrypoint = dropboxEntrypoint;
 
         // menu
