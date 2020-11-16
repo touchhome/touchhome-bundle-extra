@@ -31,7 +31,7 @@ public class WeatherUnitSetting implements BundleSettingPlugin<WeatherUnitSettin
 
     @Override
     public List<Option> loadAvailableValues(EntityContext entityContext) {
-        return Option.list(WeatherUnit.class);
+        return Option.enumList(WeatherUnit.class);
     }
 
     public enum WeatherUnit {

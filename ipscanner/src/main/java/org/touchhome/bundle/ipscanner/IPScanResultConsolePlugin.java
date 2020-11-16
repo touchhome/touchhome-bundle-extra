@@ -32,7 +32,7 @@ public class IPScanResultConsolePlugin implements ConsolePlugin {
     @SneakyThrows
     public List<? extends HasEntityIdentifier> drawEntity() {
         List<IpAddressPluginEntity> list = new ArrayList<>();
-        Boolean showDeadHosts = entityContext.getSettingValue(ConsoleShowDeadHostsSetting.class);
+        Boolean showDeadHosts = entityContext.setting().getValue(ConsoleShowDeadHostsSetting.class);
         for (IPScannerService.ResultValue resultValue : ipScannerService.getIpScannerContext().getScanningResults()) {
             if (showDeadHosts || resultValue.type != ScanningResult.ResultType.DEAD) {
                 list.add(new IpAddressPluginEntity(resultValue));
@@ -103,6 +103,11 @@ public class IPScanResultConsolePlugin implements ConsolePlugin {
         @Override
         public String getEntityID() {
             return ip;
+        }
+
+        @Override
+        public Integer getId() {
+            return null;
         }
 
         @Override

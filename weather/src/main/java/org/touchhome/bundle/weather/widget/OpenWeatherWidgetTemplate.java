@@ -5,10 +5,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Component;
 import org.touchhome.bundle.api.EntityContext;
+import org.touchhome.bundle.api.hardware.wifi.WirelessHardwareRepository;
 import org.touchhome.bundle.api.ui.field.UIField;
 import org.touchhome.bundle.api.ui.field.UIFieldNumber;
 import org.touchhome.bundle.api.ui.field.UIFieldType;
-import org.touchhome.bundle.api.util.TouchHomeUtils;
 import org.touchhome.bundle.api.widget.JavaScriptBuilder;
 import org.touchhome.bundle.api.widget.WidgetJSBaseTemplate;
 import org.touchhome.bundle.weather.setting.WeatherApiKeySetting;
@@ -19,6 +19,7 @@ import org.touchhome.bundle.weather.setting.WeatherUnitSetting;
 @RequiredArgsConstructor
 public class OpenWeatherWidgetTemplate implements WidgetJSBaseTemplate {
     private final EntityContext entityContext;
+    private final WirelessHardwareRepository wirelessHardwareRepository;
 
     @UIField(order = 1, type = UIFieldType.Slider, label = "weather.type")
     @UIFieldNumber(min = 1, max = 24)
@@ -45,15 +46,16 @@ public class OpenWeatherWidgetTemplate implements WidgetJSBaseTemplate {
         String containerId = "cow-" + System.currentTimeMillis();
         javaScriptBuilder
                 .jsonParam("id", "15")
-                .jsonParam("city_name", TouchHomeUtils.getIpGeoLocation(TouchHomeUtils.getOuterIpAddress()).getCity());
+                .jsonParam("city_name", wirelessHardwareRepository.getIpGeoLocation(
+                        wirelessHardwareRepository.getOuterIpAddress()).getCity());
 
         javaScriptBuilder.readyOnClient().window(window -> {
             window.array("myWidgetParam")
                     .value("id", "${id}")
                     .value("city_name", "${city_name}")
                     .value("containerid", containerId)
-                    .value("units", (JavaScriptBuilder.ProxyEntityContextValue) entityContext -> entityContext.getSettingValue(WeatherUnitSetting.class))
-                    .value("appid", (JavaScriptBuilder.ProxyEntityContextValue) entityContext -> entityContext.getSettingValue(WeatherApiKeySetting.class));
+                    .value("units", (JavaScriptBuilder.ProxyEntityContextValue) entityContext -> entityContext.setting().getValue(WeatherUnitSetting.class))
+                    .value("appid", (JavaScriptBuilder.ProxyEntityContextValue) entityContext -> entityContext.setting().getValue(WeatherApiKeySetting.class));
         })
                 .addGlobalScript("//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js");
 

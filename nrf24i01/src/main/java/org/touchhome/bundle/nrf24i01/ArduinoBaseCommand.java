@@ -3,9 +3,9 @@ package org.touchhome.bundle.nrf24i01;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 @Getter
-public enum Command {
+@RequiredArgsConstructor
+public enum ArduinoBaseCommand {
     EXECUTED(0),
     FAILED_EXECUTED(1),
     REGISTER_COMMAND(2),
@@ -14,15 +14,19 @@ public enum Command {
     GET_TIME_COMMAND(5),
     SET_PIN_VALUE_ON_HANDLER_REQUEST_COMMAND(6),
     GET_PIN_VALUE_COMMAND(7),
-    //SET_PIN_VALUE_COMMAND(8),
-    GET_PIN_MODE_COMMAND(9),
+
+    SET_PIN_DIGITAL_VALUE_COMMAND(8),
+    SET_PIN_ANALOG_VALUE_COMMAND(9),
+
     RESPONSE_COMMAND(10),
     PING(11),
-    REMOVE_GET_PIN_VALUE_REQUEST_COMMAND(12),
-    SET_PIN_VALUE_BULK_COMMAND(13),
+    // GET_PIN_MODE_COMMAND(9),
+
     GET_PIN_VALUE_REQUEST_COMMAND(14),
-    REMOVE_HANDLER_REQUEST_WHEN_PIN_VALUE_OP_THAN(15),
-    HANDLER_REQUEST_WHEN_PIN_VALUE_OP_THAN(30);
+    REMOVE_GET_PIN_VALUE_REQUEST_COMMAND(15),
+
+    HANDLER_REQUEST_WHEN_PIN_VALUE_OP_THAN(29),
+    REMOVE_HANDLER_REQUEST_WHEN_PIN_VALUE_OP_THAN(30);
 
     private final int value;
 }

@@ -2,6 +2,7 @@ package org.touchhome.bundle.weather.providers;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.text.StringSubstitutor;
+import org.touchhome.bundle.api.hardware.wifi.WirelessHardwareRepository;
 import org.touchhome.bundle.api.model.HasDescription;
 import org.touchhome.bundle.api.util.Curl;
 import org.touchhome.bundle.api.util.TouchHomeUtils;
@@ -12,6 +13,7 @@ public abstract class BaseWeatherProvider<T> implements WeatherProvider<T>, HasD
 
     private final Class<T> weatherJSONType;
     private final String url;
+    private final WirelessHardwareRepository wirelessHardwareRepository;
     private T data;
     private long lastRequestTimeout;
 
@@ -20,7 +22,7 @@ public abstract class BaseWeatherProvider<T> implements WeatherProvider<T>, HasD
      */
     private synchronized T readJson(String city) {
         if (data == null || System.currentTimeMillis() - lastRequestTimeout > 60000) {
-            TouchHomeUtils.CityToGeoLocation cityGeolocation = TouchHomeUtils.findCityGeolocation(city);
+            WirelessHardwareRepository.CityToGeoLocation cityGeolocation = wirelessHardwareRepository.findCityGeolocation(city);
             data = Curl.get(buildWeatherRequest(city, cityGeolocation.getLatt(), cityGeolocation.getLongt()).replace(url), weatherJSONType);
             lastRequestTimeout = System.currentTimeMillis();
         }

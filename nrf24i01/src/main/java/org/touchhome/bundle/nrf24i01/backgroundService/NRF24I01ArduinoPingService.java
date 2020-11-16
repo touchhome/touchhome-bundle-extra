@@ -1,47 +1,40 @@
 package org.touchhome.bundle.nrf24i01.backgroundService;
 
 import org.touchhome.bundle.api.EntityContext;
-import org.touchhome.bundle.api.thread.BackgroundProcessService;
 import org.touchhome.bundle.api.util.UpdatableValue;
-import org.touchhome.bundle.arduino.model.ArduinoDeviceEntity;
 import org.touchhome.bundle.arduino.repository.ArduinoDeviceRepository;
-import org.touchhome.bundle.nrf24i01.Command;
 import org.touchhome.bundle.nrf24i01.NRF24I01BundleEntrypoint;
-import org.touchhome.bundle.nrf24i01.communication.RF24Message;
-import org.touchhome.bundle.nrf24i01.communication.ReadListener;
-import org.touchhome.bundle.nrf24i01.communication.SendCommand;
-import pl.grzeslowski.smarthome.rf24.helpers.Pipe;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.touchhome.bundle.nrf24i01.Nrf24i01Configuration.ARDUINO_MAX_MISSED_PINGS;
-import static org.touchhome.bundle.nrf24i01.Nrf24i01Configuration.ARDUINO_PING_INTERVAL;
-
-public class NRF24I01ArduinoPingService extends BackgroundProcessService<Void> {
+/**
+ * Should be in general
+ */
+public class NRF24I01ArduinoPingService /*extends BackgroundProcessService<Void> */ {
 
     private final NRF24I01BundleEntrypoint NRF24I01BundleEntrypoint;
     private final ArduinoDeviceRepository arduinoDeviceRepository;
     private final Map<String, UpdatableValue<Integer>> missedPings = new HashMap<>();
 
     public NRF24I01ArduinoPingService(EntityContext entityContext) {
-        super(NRF24I01ArduinoPingService.class.getSimpleName(), entityContext);
+       // super(NRF24I01ArduinoPingService.class.getSimpleName(), entityContext);
         NRF24I01BundleEntrypoint = entityContext.getBean(NRF24I01BundleEntrypoint.class);
         arduinoDeviceRepository = entityContext.getBean(ArduinoDeviceRepository.class);
     }
 
-    @Override
+    /*@Override
     public Void runInternal() {
         for (ArduinoDeviceEntity arduinoEntity : entityContext.findAll(ArduinoDeviceEntity.class)) {
             try {
                 RF24Message pingMessage = NRF24I01BundleEntrypoint.createPingCommand(arduinoEntity);
-                SendCommand sendCommand = SendCommand.sendPayload(Command.PING);
+                SendCommand sendCommand = SendCommand.sendPayload(ArduinoBaseCommand.PING);
 
                 NRF24I01BundleEntrypoint.subscribeForReading(new ReadListener() {
                     @Override
                     public boolean canReceive(RF24Message rf24Message) {
                         return rf24Message.getMessageID() == pingMessage.getMessageID()
-                                && rf24Message.getCommandPlugin().getCommandIndex() == Command.PING.getValue();
+                                && rf24Message.getCommandPlugin().getCommandIndex() == ArduinoBaseCommand.PING.getValue();
                     }
 
                     @Override
@@ -109,5 +102,5 @@ public class NRF24I01ArduinoPingService extends BackgroundProcessService<Void> {
     @Override
     public boolean shouldStartNow() {
         return true;
-    }
+    }*/
 }

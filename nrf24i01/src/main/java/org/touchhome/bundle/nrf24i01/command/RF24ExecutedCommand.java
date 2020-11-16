@@ -9,7 +9,7 @@ import org.touchhome.bundle.nrf24i01.communication.SendCommand;
 
 import java.util.Map;
 
-import static org.touchhome.bundle.nrf24i01.Command.EXECUTED;
+import static org.touchhome.bundle.nrf24i01.ArduinoBaseCommand.EXECUTED;
 
 @Log4j2
 @Component

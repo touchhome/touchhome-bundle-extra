@@ -9,7 +9,6 @@ import org.eclipse.paho.client.mqttv3.*;
 import org.springframework.stereotype.Component;
 import org.touchhome.bundle.api.BundleEntrypoint;
 import org.touchhome.bundle.api.EntityContext;
-import org.touchhome.bundle.api.hardware.HardwareEvents;
 import org.touchhome.bundle.api.json.NotificationEntityJSON;
 import org.touchhome.bundle.api.util.NotificationType;
 import org.touchhome.bundle.api.util.TouchHomeUtils;
@@ -30,38 +29,37 @@ public class MQTTEntrypoint implements BundleEntrypoint, MqttCallbackExtended {
 
     private final EntityContext entityContext;
     private final BroadcastLockManager broadcastLockManager;
-    private final HardwareEvents hardwareEvents;
 
     @Getter
     private MqttClient mqttClient;
 
     @SneakyThrows
     public void init() {
-        entityContext.listenSettingValue(MQTTReconnectSetting.class, this::reconnect);
-        hardwareEvents.addEvent("mqtt-connection-lost", "MQTT lost connection");
-        hardwareEvents.addEvent("mqtt-connected", "MQTT connected");
+        entityContext.setting().listenValue(MQTTReconnectSetting.class, "mqtt-reconnect", this::reconnect);
+        entityContext.event().addEvent("mqtt-connection-lost", "MQTT lost connection");
+        entityContext.event().addEvent("mqtt-connected", "MQTT connected");
         reconnect();
     }
 
     private void reconnect() {
-        entityContext.setSettingValue(MQTTStatusSetting.class, "Connecting...");
-        String host = entityContext.getSettingValue(MQTTHostSetting.class);
-        Integer port = entityContext.getSettingValue(MQTTPortSetting.class);
+        entityContext.setting().setValue(MQTTStatusSetting.class, "Connecting...");
+        String host = entityContext.setting().getValue(MQTTHostSetting.class);
+        Integer port = entityContext.setting().getValue(MQTTPortSetting.class);
         String serverURL = String.format("tcp://%s:%d", host, port);
         try {
             this.destroy();
             if (StringUtils.isNotEmpty(host)) {
 
                 MqttConnectOptions options = new MqttConnectOptions();
-                options.setAutomaticReconnect(entityContext.getSettingValue(MQTTAutomaticReconnectSetting.class));
-                options.setCleanSession(entityContext.getSettingValue(MQTTCleanSessionOnConnectSetting.class));
-                options.setConnectionTimeout((int) TimeUnit.SECONDS.toMillis(entityContext.getSettingValue(MQTTConnectionTimeoutSetting.class)));
-                options.setKeepAliveInterval(entityContext.getSettingValue(MQTTKeepAliveSetting.class));
-                options.setMaxReconnectDelay(entityContext.getSettingValue(MQTTReconnectTimeSetting.class));
-                options.setUserName(entityContext.getSettingValue(MQTTUsernameSetting.class));
-                options.setPassword(entityContext.getSettingValue(MQTTPasswordSetting.class, "").toCharArray());
+                options.setAutomaticReconnect(entityContext.setting().getValue(MQTTAutomaticReconnectSetting.class));
+                options.setCleanSession(entityContext.setting().getValue(MQTTCleanSessionOnConnectSetting.class));
+                options.setConnectionTimeout((int) TimeUnit.SECONDS.toMillis(entityContext.setting().getValue(MQTTConnectionTimeoutSetting.class)));
+                options.setKeepAliveInterval(entityContext.setting().getValue(MQTTKeepAliveSetting.class));
+                options.setMaxReconnectDelay(entityContext.setting().getValue(MQTTReconnectTimeSetting.class));
+                options.setUserName(entityContext.setting().getValue(MQTTUsernameSetting.class));
+                options.setPassword(entityContext.setting().getValue(MQTTPasswordSetting.class, "").toCharArray());
 
-                mqttClient = new MqttClient(serverURL, entityContext.getSettingValue(MQTTClientIDSetting.class, UUID.randomUUID().toString()));
+                mqttClient = new MqttClient(serverURL, entityContext.setting().getValue(MQTTClientIDSetting.class, UUID.randomUUID().toString()));
                 mqttClient.setCallback(this);
                 mqttClient.connect(options);
                 mqttClient.subscribe("#");
@@ -73,9 +71,9 @@ public class MQTTEntrypoint implements BundleEntrypoint, MqttCallbackExtended {
 
     @Override
     public Set<NotificationEntityJSON> getNotifications() {
-        String value = entityContext.getSettingValue(MQTTStatusSetting.class);
+        String value = entityContext.setting().getValue(MQTTStatusSetting.class);
         return new HashSet<>(Collections.singletonList(new NotificationEntityJSON("mqtt-status")
-                .setNotificationType(value.startsWith("Connection lost") ? NotificationType.danger : NotificationType.success)
+                .setNotificationType(value.startsWith("Connection lost") ? NotificationType.error : NotificationType.success)
                 .setName("MQTT: " + value)));
     }
 
@@ -100,10 +98,10 @@ public class MQTTEntrypoint implements BundleEntrypoint, MqttCallbackExtended {
 
     @Override
     public void connectionLost(Throwable cause) {
-        entityContext.sendErrorMessage("MQTT connection lost", (Exception) cause);
+        entityContext.ui().sendErrorMessage("MQTT connection lost", (Exception) cause);
         String msg = TouchHomeUtils.getErrorMessage(cause);
-        entityContext.setSettingValue(MQTTStatusSetting.class, "Connection lost: " + msg);
-        hardwareEvents.fireEvent("mqtt-connection-lost", msg);
+        entityContext.setting().setValue(MQTTStatusSetting.class, "Connection lost: " + msg);
+        entityContext.event().fireEvent("mqtt-connection-lost", msg);
     }
 
     @Override
@@ -123,8 +121,8 @@ public class MQTTEntrypoint implements BundleEntrypoint, MqttCallbackExtended {
 
     @Override
     public void connectComplete(boolean reconnect, String serverURI) {
-        hardwareEvents.fireEvent("mqtt-connected");
-        entityContext.setSettingValue(MQTTStatusSetting.class, "Connected");
-        entityContext.sendInfoMessage("MQTT server connected");
+        entityContext.event().fireEvent("mqtt-connected");
+        entityContext.setting().setValue(MQTTStatusSetting.class, "Connected");
+        entityContext.ui().sendInfoMessage("MQTT server connected");
     }
 }

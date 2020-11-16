@@ -42,18 +42,18 @@ public class Scratch3WeatherBlocks extends Scratch3ExtensionBlocks {
     }
 
     private Double readWeatherTemperature(WorkspaceBlock workspaceBlock) {
-        return entityContext.getSettingValue(WeatherProviderSetting.class).readWeatherTemperature(workspaceBlock.getInputString(CITY));
+        return entityContext.setting().getValue(WeatherProviderSetting.class).readWeatherTemperature(workspaceBlock.getInputString(CITY));
     }
 
     private Double readWeatherPressure(WorkspaceBlock workspaceBlock) {
-        return entityContext.getSettingValue(WeatherProviderSetting.class).readWeatherPressure(workspaceBlock.getInputString(CITY));
+        return entityContext.setting().getValue(WeatherProviderSetting.class).readWeatherPressure(workspaceBlock.getInputString(CITY));
     }
 
     private Double readWeatherHumidity(WorkspaceBlock workspaceBlock) {
-        return entityContext.getSettingValue(WeatherProviderSetting.class).readWeatherHumidity(workspaceBlock.getInputString(CITY));
+        return entityContext.setting().getValue(WeatherProviderSetting.class).readWeatherHumidity(workspaceBlock.getInputString(CITY));
     }
 
     private JSONObject readWeather(WorkspaceBlock workspaceBlock) {
-        return entityContext.getSettingValue(WeatherProviderSetting.class).readWeatherJSON(workspaceBlock.getInputString(CITY));
+        return entityContext.setting().getValue(WeatherProviderSetting.class).readWeatherJSON(workspaceBlock.getInputString(CITY));
     }
 }

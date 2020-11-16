@@ -23,7 +23,7 @@ public class Scratch3MQTTBlocks extends Scratch3ExtensionBlocks {
 
     private final MQTTEntrypoint mqttEntrypoint;
     private final BroadcastLockManager broadcastLockManager;
-    private final MenuBlock.StaticMenuBlock publishLevelMenu;
+    private final MenuBlock.StaticMenuBlock<QoSLevel> publishLevelMenu;
 
     private final Scratch3Block publish;
     private final Scratch3Block subscribe;
@@ -36,7 +36,7 @@ public class Scratch3MQTTBlocks extends Scratch3ExtensionBlocks {
         this.broadcastLockManager = broadcastLockManager;
 
         // menu
-        this.publishLevelMenu = MenuBlock.ofStatic(LEVEL, QoSLevel.class);
+        this.publishLevelMenu = MenuBlock.ofStatic(LEVEL, QoSLevel.class, QoSLevel.AtMostOnce);
 
         // blocks
         this.subscribeToAnything = Scratch3Block.ofHandler(10, "subscribe_any", BlockType.hat,
@@ -48,14 +48,14 @@ public class Scratch3MQTTBlocks extends Scratch3ExtensionBlocks {
 
         this.subscribeToValue = Scratch3Block.ofHandler(30, "subscribe_payload", BlockType.hat,
                 "Subscribe to topic [TOPIC] and payload [PAYLOAD]", this::subscribeToValue);
-        this.subscribeToValue.addArgument(TOPIC, ArgumentType.string);
-        this.subscribeToValue.addArgument(PAYLOAD, ArgumentType.string);
+        this.subscribeToValue.addArgument(TOPIC);
+        this.subscribeToValue.addArgument(PAYLOAD);
 
         this.publish = Scratch3Block.ofHandler(40, "publish", BlockType.command,
                 "Publish payload [PAYLOAD] to topic [TOPIC] | Level: [LEVEL], Retained: [RETAINED]", this::publish);
         this.publish.addArgument(TOPIC, ArgumentType.string);
         this.publish.addArgument(PAYLOAD, ArgumentType.string);
-        this.publish.addArgument(LEVEL, ArgumentType.string, QoSLevel.AtMostOnce.name(), this.publishLevelMenu);
+        this.publish.addArgument(LEVEL, this.publishLevelMenu);
         this.publish.addArgument(RETAINED, ArgumentType.checkbox);
 
         postConstruct();
@@ -77,7 +77,7 @@ public class Scratch3MQTTBlocks extends Scratch3ExtensionBlocks {
     }
 
     private void subscribeToValue(WorkspaceBlock workspaceBlock, String payload, String topic) {
-        if (workspaceBlock.hasNext() && isNotBlank(topic)) {
+        if (workspaceBlock.getNext() != null && isNotBlank(topic)) {
             BroadcastLock lock = broadcastLockManager.getOrCreateLock(workspaceBlock, "mqtt-" + topic, payload);
             workspaceBlock.subscribeToLock(lock);
         }
@@ -90,7 +90,7 @@ public class Scratch3MQTTBlocks extends Scratch3ExtensionBlocks {
             this.mqttEntrypoint.getMqttClient().publish(
                     topic,
                     payload.getBytes(),
-                    workspaceBlock.getMenuValue(LEVEL, this.publishLevelMenu, QoSLevel.class).ordinal(),
+                    workspaceBlock.getMenuValue(LEVEL, this.publishLevelMenu).ordinal(),
                     workspaceBlock.getInputBoolean(RETAINED));
         }
     }

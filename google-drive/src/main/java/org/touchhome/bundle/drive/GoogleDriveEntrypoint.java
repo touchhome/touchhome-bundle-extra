@@ -22,16 +22,16 @@ public class GoogleDriveEntrypoint implements BundleEntrypoint {
     @Override
     public void init() {
         restart();
-        entityContext.listenSettingValue(GoogleDriveRestartButtonSetting.class, this::restart);
+        entityContext.setting().listenValue(GoogleDriveRestartButtonSetting.class, "google-drive-restart", this::restart);
     }
 
     private void restart() {
         try {
             googleDriveFileSystem.invalidate();
             googleDriveFileSystem.getFileByName("root");
-            entityContext.setSettingValue(GoogleDriveStatusSetting.class, BundleSettingPluginStatus.ONLINE);
+            entityContext.setting().setValue(GoogleDriveStatusSetting.class, BundleSettingPluginStatus.ONLINE);
         } catch (Exception ex) {
-            entityContext.setSettingValue(GoogleDriveStatusSetting.class, BundleSettingPluginStatus.error(ex));
+            entityContext.setting().setValue(GoogleDriveStatusSetting.class, BundleSettingPluginStatus.error(ex));
         }
     }
 

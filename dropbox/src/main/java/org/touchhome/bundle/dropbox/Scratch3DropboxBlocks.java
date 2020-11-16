@@ -29,7 +29,7 @@ public class Scratch3DropboxBlocks extends Scratch3ExtensionBlocks {
         this.dropboxEntrypoint = dropboxEntrypoint;
 
         // menu
-        this.filesMenu = MenuBlock.ofServer("FILES", "rest/dropbox/file", "-", "-");
+        this.filesMenu = MenuBlock.ofServer("FILES", "rest/dropbox/file");
 
         // blocks
         this.sendFile = Scratch3Block.ofHandler(10, "send_file", BlockType.command, "Send file path [PATH] value [CONTENT]", this::sendFileHandle);
@@ -37,24 +37,24 @@ public class Scratch3DropboxBlocks extends Scratch3ExtensionBlocks {
         this.sendFile.addArgument("CONTENT", ArgumentType.string);
 
         this.getFileContent = Scratch3Block.ofEvaluate(20, "get_file_content", BlockType.reporter, "Get file [FILE] content | Raw: [RAW]", this::getFieldContent);
-        this.getFileContent.addArgument("FILE", ArgumentType.string, "-", this.filesMenu);
+        this.getFileContent.addArgument("FILE", this.filesMenu);
         this.getFileContent.addArgument("RAW", ArgumentType.checkbox);
 
         this.deleteFile = Scratch3Block.ofHandler(30, "delete_file", BlockType.command, "Delete file [FILE]", this::deleteFileHandle);
-        this.deleteFile.addArgument("FILE", ArgumentType.string, "-", this.filesMenu);
+        this.deleteFile.addArgument("FILE", this.filesMenu);
 
         postConstruct();
     }
 
     private void deleteFileHandle(WorkspaceBlock workspaceBlock) throws DbxException {
-        String fileId = workspaceBlock.getMenuValue("FILE", this.filesMenu, String.class);
+        String fileId = workspaceBlock.getMenuValue("FILE", this.filesMenu);
         if (!"-".equals(fileId)) {
             this.dropboxEntrypoint.getClient().files().deleteV2(fileId);
         }
     }
 
     private Object getFieldContent(WorkspaceBlock workspaceBlock) throws DbxException, IOException {
-        String fileId = workspaceBlock.getMenuValue("FILE", this.filesMenu, String.class);
+        String fileId = workspaceBlock.getMenuValue("FILE", this.filesMenu);
         boolean isRaw = workspaceBlock.getInputBoolean("RAW");
         if (!"-".equals(fileId)) {
             ByteArrayOutputStream stream = new ByteArrayOutputStream();

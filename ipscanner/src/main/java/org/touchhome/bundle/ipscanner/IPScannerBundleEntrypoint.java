@@ -24,13 +24,13 @@ public class IPScannerBundleEntrypoint implements BundleEntrypoint {
     @Override
     public void init() {
         NotificationEntityJSON scanJSON = new NotificationEntityJSON("ip-scanner-scan").setName("ipscanner.start_scan");
-        ipScannerService.getScannerConfig().portString = entityContext.getSettingValue(ConsoleScannedPortsSetting.class).getString("ipscanner_ports");
-        ipScannerService.setCompleteHandler(() -> entityContext.hideAlwaysOnViewNotification(scanJSON));
+        ipScannerService.getScannerConfig().portString = entityContext.setting().getValue(ConsoleScannedPortsSetting.class).getString("ipscanner_ports");
+        ipScannerService.setCompleteHandler(() -> entityContext.ui().hideAlwaysOnViewNotification(scanJSON));
 
-        entityContext.listenSettingValue(ConsoleScannedPortsSetting.class, jsonObject ->
+        entityContext.setting().listenValue(ConsoleScannedPortsSetting.class, "ipscanner-ports", jsonObject ->
                 ipScannerService.getScannerConfig().portString = jsonObject.getString("ipscanner_ports"));
-        entityContext.listenSettingValue(IpScannerHeaderStopButtonSetting.class, this::stopScanning);
-        entityContext.listenSettingValue(IpScannerHeaderStartButtonSetting.class,
+        entityContext.setting().listenValue(IpScannerHeaderStopButtonSetting.class, "ipscanner-stop", this::stopScanning);
+        entityContext.setting().listenValue(IpScannerHeaderStartButtonSetting.class, "ipscanner-start",
                 jsonObject -> startScanning(scanJSON, jsonObject));
     }
 
@@ -53,7 +53,7 @@ public class IPScannerBundleEntrypoint implements BundleEntrypoint {
 
     private void startScanning(NotificationEntityJSON scanJSON, JSONObject jsonObject) {
         if (ipScannerService.getStateMachine().inState(ScanningState.IDLE)) {
-            entityContext.showAlwaysOnViewNotification(
+            entityContext.ui().showAlwaysOnViewNotification(
                     scanJSON, "fas fa-spin fa-hourglass-start", "#325E32", IpScannerHeaderStopButtonSetting.class);
             ipScannerService.startScan(jsonObject.getString("startIP"), jsonObject.getString("endIP"));
         }

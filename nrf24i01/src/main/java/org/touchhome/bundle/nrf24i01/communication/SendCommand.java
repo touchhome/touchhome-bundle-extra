@@ -1,30 +1,30 @@
 package org.touchhome.bundle.nrf24i01.communication;
 
-import org.touchhome.bundle.nrf24i01.Command;
+import org.touchhome.bundle.nrf24i01.ArduinoBaseCommand;
 
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 
 public class SendCommand {
-    public static SendCommand SEND_ERROR = new SendCommand(true, null, Command.FAILED_EXECUTED);
+    public static SendCommand SEND_ERROR = new SendCommand(true, null, ArduinoBaseCommand.FAILED_EXECUTED);
     private final boolean isError;
     private final byte[] payload;
     private final byte commandID;
 
-    private SendCommand(boolean isError, byte[] payload, Command command) {
+    private SendCommand(boolean isError, byte[] payload, ArduinoBaseCommand arduinoBaseCommand) {
         this.isError = isError;
         this.payload = payload;
-        this.commandID = (byte) command.getValue();
+        this.commandID = (byte) arduinoBaseCommand.getValue();
     }
 
-    public static SendCommand sendPayload(Command command) {
-        return new SendCommand(false, new byte[0], command);
+    public static SendCommand sendPayload(ArduinoBaseCommand arduinoBaseCommand) {
+        return new SendCommand(false, new byte[0], arduinoBaseCommand);
     }
 
-    public static SendCommand sendPayload(Command command, long value) {
+    public static SendCommand sendPayload(ArduinoBaseCommand arduinoBaseCommand, long value) {
         ByteBuffer buffer = ByteBuffer.allocate(Long.BYTES);
         buffer.putLong(value);
-        return new SendCommand(false, buffer.array(), command);
+        return new SendCommand(false, buffer.array(), arduinoBaseCommand);
     }
 
     /*public static SendCommand sendPayload(Command command, Pin pin, int value) {
@@ -34,8 +34,8 @@ public class SendCommand {
         return new SendCommand(false, buffer.array(), command);
     }*/
 
-    public static SendCommand sendPayload(Command command, ByteBuffer buffer) {
-        return new SendCommand(false, buffer.array(), command);
+    public static SendCommand sendPayload(ArduinoBaseCommand arduinoBaseCommand, ByteBuffer buffer) {
+        return new SendCommand(false, buffer.array(), arduinoBaseCommand);
     }
 
     /*public static SendCommand sendPayload(Command command, Pin pin) {
@@ -44,10 +44,10 @@ public class SendCommand {
         return new SendCommand(false, buffer.array(), command);
     }*/
 
-    public static SendCommand sendPayload(Command command, int value) {
+    public static SendCommand sendPayload(ArduinoBaseCommand arduinoBaseCommand, int value) {
         ByteBuffer buffer = ByteBuffer.allocate(Integer.BYTES);
         buffer.putInt(value);
-        return new SendCommand(false, buffer.array(), command);
+        return new SendCommand(false, buffer.array(), arduinoBaseCommand);
     }
 
     public byte[] getPayload() {

@@ -5,6 +5,7 @@ import lombok.Setter;
 import org.apache.commons.text.StringSubstitutor;
 import org.springframework.stereotype.Component;
 import org.touchhome.bundle.api.EntityContext;
+import org.touchhome.bundle.api.hardware.wifi.WirelessHardwareRepository;
 import org.touchhome.bundle.weather.setting.WeatherApiKeySetting;
 import org.touchhome.bundle.weather.setting.WeatherLangSetting;
 import org.touchhome.bundle.weather.setting.WeatherUnitSetting;
@@ -18,8 +19,8 @@ public class OpenWeatherMapProvider extends BaseWeatherProvider<OpenWeatherMapPr
     private static final String URL = "https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${key}&units=${unit}&lang=${lang}";
     private final EntityContext entityContext;
 
-    public OpenWeatherMapProvider(EntityContext entityContext) {
-        super(WeatherJSON.class, URL);
+    public OpenWeatherMapProvider(EntityContext entityContext, WirelessHardwareRepository wirelessHardwareRepository) {
+        super(WeatherJSON.class, URL, wirelessHardwareRepository);
         this.entityContext = entityContext;
     }
 
@@ -49,9 +50,9 @@ public class OpenWeatherMapProvider extends BaseWeatherProvider<OpenWeatherMapPr
 
         valuesMap.put("lat", latt);
         valuesMap.put("lon", longt);
-        valuesMap.put("unit", entityContext.getSettingValue(WeatherUnitSetting.class).name());
-        valuesMap.put("key", entityContext.getSettingValue(WeatherApiKeySetting.class));
-        valuesMap.put("lang", entityContext.getSettingValue(WeatherLangSetting.class));
+        valuesMap.put("unit", entityContext.setting().getValue(WeatherUnitSetting.class).name());
+        valuesMap.put("key", entityContext.setting().getValue(WeatherApiKeySetting.class));
+        valuesMap.put("lang", entityContext.setting().getValue(WeatherLangSetting.class));
         return new StringSubstitutor(valuesMap);
     }
 

@@ -6,12 +6,12 @@ import org.springframework.stereotype.Component;
 import org.touchhome.bundle.api.EntityContext;
 import org.touchhome.bundle.arduino.model.ArduinoDeviceEntity;
 import org.touchhome.bundle.arduino.repository.ArduinoDeviceRepository;
-import org.touchhome.bundle.nrf24i01.Command;
+import org.touchhome.bundle.nrf24i01.ArduinoBaseCommand;
 import org.touchhome.bundle.nrf24i01.communication.RF24Message;
 import org.touchhome.bundle.nrf24i01.communication.SendCommand;
 import pl.grzeslowski.smarthome.rf24.helpers.Pipe;
 
-import static org.touchhome.bundle.nrf24i01.Command.REGISTER_COMMAND;
+import static org.touchhome.bundle.nrf24i01.ArduinoBaseCommand.REGISTER_COMMAND;
 
 @Log4j2
 @Component
@@ -50,7 +50,7 @@ public class RF24RegisterCommand implements RF24CommandPlugin {
                 /*entity.setMissedPings(0);
                 entityContext.save(entity);*/
             }
-            return SendCommand.sendPayload(Command.SET_UNIQUE_READ_ADDRESS, new Pipe(entity.getPipe()).getPipe());
+            return SendCommand.sendPayload(ArduinoBaseCommand.SET_UNIQUE_READ_ADDRESS, new Pipe(entity.getPipe()).getPipe());
         } else {
             log.error("Unable to register unknown device type: <{}>", dt);
         }

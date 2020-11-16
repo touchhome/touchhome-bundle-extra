@@ -13,7 +13,7 @@
     <parent>
         <groupId>org.touchhome</groupId>
         <artifactId>touchhome-dependency</artifactId>
-        <version>2.3.2</version>
+        <version>2.3.6-SNAPSHOT</version>
     </parent>
 
     <scm>
@@ -26,7 +26,7 @@
     <modules>
         <module>google-drive</module>
         <module>rf433</module>
-        <module>nrf24i01</module>
+        <!--<module>nrf24i01</module>-->
         <module>weather</module>
         <module>ipscanner</module>
         <module>mqtt-client</module>
@@ -34,8 +34,8 @@
     </modules>
 
     <properties>
-        <touchhome-bundle-api.version>1.0.9-SNAPSHOT</touchhome-bundle-api.version>
-        <touchhome-bundle.version>1.0.12-SNAPSHOT</touchhome-bundle.version>
+        <touchhome-bundle-api.version>1.0.10-SNAPSHOT</touchhome-bundle-api.version>
+        <touchhome-bundle.version>1.0.13-SNAPSHOT</touchhome-bundle.version>
     </properties>
 
     <dependencies>

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import org.touchhome.bundle.nrf24i01.communication.RF24Message;
 import org.touchhome.bundle.nrf24i01.communication.SendCommand;
 
-import static org.touchhome.bundle.nrf24i01.Command.SET_PIN_VALUE_ON_HANDLER_REQUEST_COMMAND;
+import static org.touchhome.bundle.nrf24i01.ArduinoBaseCommand.SET_PIN_VALUE_ON_HANDLER_REQUEST_COMMAND;
 
 @Log4j2
 @Component

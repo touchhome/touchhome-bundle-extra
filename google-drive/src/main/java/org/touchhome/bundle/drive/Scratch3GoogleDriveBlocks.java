@@ -23,7 +23,7 @@ public class Scratch3GoogleDriveBlocks extends Scratch3ExtensionBlocks {
         this.googleDriveEntrypoint = googleDriveEntrypoint;
 
         // menu
-        this.filesMenu = MenuBlock.ofServer("FILES", "rest/drive/file", "-", "-");
+        this.filesMenu = MenuBlock.ofServer("FILES", "rest/drive/file");
 
         // blocks
         this.sendFile = Scratch3Block.ofHandler(10, "send_file", BlockType.command, "Send file name [NAME] value [CONTENT] parent [PARENT]", this::sendFileHandle);
@@ -32,14 +32,14 @@ public class Scratch3GoogleDriveBlocks extends Scratch3ExtensionBlocks {
         this.sendFile.addArgument("PARENT", ArgumentType.string);
 
         this.getFileContent = Scratch3Block.ofEvaluate(10, "get_file_content", BlockType.reporter, "Get file [FILE] content | Raw: [RAW]", this::getFieldContent);
-        this.getFileContent.addArgument("FILE", ArgumentType.string, "-", this.filesMenu);
+        this.getFileContent.addArgument("FILE", this.filesMenu);
         this.getFileContent.addArgument("RAW", ArgumentType.checkbox);
 
         postConstruct();
     }
 
     private Object getFieldContent(WorkspaceBlock workspaceBlock) {
-        String fileId = workspaceBlock.getMenuValue("FILE", this.filesMenu, String.class);
+        String fileId = workspaceBlock.getMenuValue("FILE", this.filesMenu);
         boolean isRaw = workspaceBlock.getInputBoolean("RAW");
         if (!"-".equals(fileId)) {
             if (isRaw) {

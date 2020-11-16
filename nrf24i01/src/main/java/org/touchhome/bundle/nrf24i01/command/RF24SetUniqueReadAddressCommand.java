@@ -3,11 +3,9 @@ package org.touchhome.bundle.nrf24i01.command;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.touchhome.bundle.api.EntityContext;
-import org.touchhome.bundle.arduino.model.ArduinoDeviceEntity;
-import org.touchhome.bundle.arduino.repository.ArduinoDeviceRepository;
 import org.touchhome.bundle.nrf24i01.communication.RF24Message;
 
-import static org.touchhome.bundle.nrf24i01.Command.SET_UNIQUE_READ_ADDRESS;
+import static org.touchhome.bundle.nrf24i01.ArduinoBaseCommand.SET_UNIQUE_READ_ADDRESS;
 
 @Component
 @RequiredArgsConstructor
@@ -28,7 +26,13 @@ public class RF24SetUniqueReadAddressCommand implements RF24CommandPlugin {
     @Override
     public void onRemoteExecuted(RF24Message message) {
         String sensorID = String.valueOf(message.getTarget());
-        ArduinoDeviceEntity entity = entityContext.getEntity(ArduinoDeviceRepository.PREFIX + sensorID);
+        /*for (ArduinoDeviceEntity arduinoDeviceEntity : entityContext.findAll(ArduinoDeviceEntity.class)) {
+            if(arduinoDeviceEntity.getIeeeAddress().equals(sensorID)) {
+
+            }
+        }
+
+        ArduinoDeviceEntity entity = entityContext.getEntity(ArduinoDeviceRepository.PREFIX + sensorID);*/
 
         // such we paired devices we may send handles, ...
        /* TODO: for (AbstractRepository repository : manager.getEntityManager().getRepositories()) {

@@ -36,7 +36,7 @@ public class DropboxEntrypoint implements BundleEntrypoint {
 
     public void init() {
         restart();
-        entityContext.listenSettingValue(DropboxRestartButtonSetting.class, this::restart);
+        entityContext.setting().listenValue(DropboxRestartButtonSetting.class, "dropbox-restart", this::restart);
     }
 
     @Override
@@ -46,11 +46,11 @@ public class DropboxEntrypoint implements BundleEntrypoint {
 
     private void restart() {
         try {
-            this.client = new DbxClientV2(config, entityContext.getSettingValue(DropboxApiTokenSetting.class));
+            this.client = new DbxClientV2(config, entityContext.setting().getValue(DropboxApiTokenSetting.class));
             client.users().getCurrentAccount();
-            entityContext.setSettingValue(DropboxStatusSetting.class, BundleSettingPluginStatus.ONLINE);
+            entityContext.setting().setValue(DropboxStatusSetting.class, BundleSettingPluginStatus.ONLINE);
         } catch (Exception ex) {
-            entityContext.setSettingValue(DropboxStatusSetting.class, BundleSettingPluginStatus.error(ex));
+            entityContext.setting().setValue(DropboxStatusSetting.class, BundleSettingPluginStatus.error(ex));
         }
     }
 

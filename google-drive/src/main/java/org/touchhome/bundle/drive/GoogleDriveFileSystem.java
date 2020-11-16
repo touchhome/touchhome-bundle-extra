@@ -64,7 +64,7 @@ public class GoogleDriveFileSystem {
 
     @SneakyThrows
     public Drive getDrive() {
-        return getDrive(entityContext.getSettingValue(GoogleDriveCodeSetting.class));
+        return getDrive(entityContext.setting().getValue(GoogleDriveCodeSetting.class));
     }
 
     private Drive getDrive(String code) throws IOException {
@@ -73,7 +73,7 @@ public class GoogleDriveFileSystem {
                 drive = new Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY, getStoredCredentials()).setApplicationName(APPLICATION_NAME).build();
             } else {
                 // create code after receiving
-                entityContext.setSettingValue(GoogleDriveCodeSetting.class, null);
+                entityContext.setting().setValue(GoogleDriveCodeSetting.class, null);
                 Credential credentials = getCredentials(code);
                 drive = new Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY, credentials).setApplicationName(APPLICATION_NAME).build();
             }
@@ -85,11 +85,11 @@ public class GoogleDriveFileSystem {
         GoogleCredential credential = new GoogleCredential.Builder()
                 .setJsonFactory(JSON_FACTORY)
                 .setTransport(HTTP_TRANSPORT).setClientSecrets(
-                        entityContext.getSettingValue(GoogleDriveClientIdSetting.class),
-                        entityContext.getSettingValue(GoogleDriveClientSecretSetting.class)
+                        entityContext.setting().getValue(GoogleDriveClientIdSetting.class),
+                        entityContext.setting().getValue(GoogleDriveClientSecretSetting.class)
                 ).build();
-        credential.setAccessToken(entityContext.getSettingValue(GoogleDriveAccessTokenSetting.class));
-        credential.setRefreshToken(entityContext.getSettingValue(GoogleDriveRefreshTokenSetting.class));
+        credential.setAccessToken(entityContext.setting().getValue(GoogleDriveAccessTokenSetting.class));
+        credential.setRefreshToken(entityContext.setting().getValue(GoogleDriveRefreshTokenSetting.class));
         return credential;
     }
 
@@ -100,8 +100,8 @@ public class GoogleDriveFileSystem {
      */
     GoogleAuthorizationCodeFlow getFlow() {
         if (flow == null) {
-            String clientId = entityContext.getSettingValue(GoogleDriveClientIdSetting.class);
-            String clientSecret = entityContext.getSettingValue(GoogleDriveClientSecretSetting.class);
+            String clientId = entityContext.setting().getValue(GoogleDriveClientIdSetting.class);
+            String clientSecret = entityContext.setting().getValue(GoogleDriveClientSecretSetting.class);
             GoogleClientSecrets googleClientSecrets = new GoogleClientSecrets();
             GoogleClientSecrets.Details det = new GoogleClientSecrets.Details();
             det.setClientId(clientId);
@@ -128,14 +128,14 @@ public class GoogleDriveFileSystem {
 
     public String getAuthorizationUrl() {
         return getFlow().newAuthorizationUrl().setRedirectUri(REDIRECT_URI)
-                .setClientId(entityContext.getSettingValue(GoogleDriveClientIdSetting.class))
-                .set("user_id", entityContext.getSettingValue(GoogleDriveEmailSetting.class)).build();
+                .setClientId(entityContext.setting().getValue(GoogleDriveClientIdSetting.class))
+                .set("user_id", entityContext.setting().getValue(GoogleDriveEmailSetting.class)).build();
     }
 
     private Credential getCredentials(String authorizationCode) throws IOException {
         Credential credentials = exchangeCode(authorizationCode);
-        entityContext.setSettingValue(GoogleDriveAccessTokenSetting.class, credentials.getAccessToken());
-        entityContext.setSettingValue(GoogleDriveRefreshTokenSetting.class, credentials.getRefreshToken());
+        entityContext.setting().setValue(GoogleDriveAccessTokenSetting.class, credentials.getAccessToken());
+        entityContext.setting().setValue(GoogleDriveRefreshTokenSetting.class, credentials.getRefreshToken());
         return credentials;
     }
 

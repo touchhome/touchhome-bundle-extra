@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.touchhome.bundle.api.EntityContext;
 import org.touchhome.bundle.api.setting.BundleSettingPluginStatus;
-import org.touchhome.bundle.nrf24i01.Command;
+import org.touchhome.bundle.nrf24i01.ArduinoBaseCommand;
 import org.touchhome.bundle.nrf24i01.setting.Nrf24i01StatusSetting;
 import org.touchhome.bundle.nrf24i01.setting.advanced.*;
 import pl.grzeslowski.smarthome.rf24.exceptions.CloseRf24Exception;
@@ -81,9 +81,9 @@ public abstract class RF24Base {
             log.error("Failed sending.", ex);
         }
         String cmd = String.valueOf(commandId);
-        for (Command command : Command.values()) {
-            if (command.getValue() == commandId) {
-                cmd = command.name();
+        for (ArduinoBaseCommand arduinoBaseCommand : ArduinoBaseCommand.values()) {
+            if (arduinoBaseCommand.getValue() == commandId) {
+                cmd = arduinoBaseCommand.name();
             }
         }
         log.info("Send: Cmd <{}>. Target: <{}>. MessageID: <{}>. Payload <{}>", cmd, target, messageId, payload);
@@ -139,10 +139,10 @@ public abstract class RF24Base {
                 radio = new RF24(pins.getCePin(), pins.getCsPin(), pins.getClockSpeed());
                 //rf24.setPayloadSize(payload.getSize());
                 radio.begin();
-                radio.setRetries(entityContext.getSettingValue(Nrf24i01RetryDelaySetting.class).delay, entityContext.getSettingValue(Nrf24i01RetryCountSetting.class).count);
-                radio.setCRCLength(entityContext.getSettingValue(Nrf24i01CrcSizeSetting.class).valueSupplier.get());
-                radio.setPALevel((short) entityContext.getSettingValue(Nrf24i01PALevelSetting.class).valueSupplier.get().swigValue());
-                radio.setDataRate(entityContext.getSettingValue(Nrf24i01DataRateSetting.class).valueSupplier.get());
+                radio.setRetries(entityContext.setting().getValue(Nrf24i01RetryDelaySetting.class).delay, entityContext.setting().getValue(Nrf24i01RetryCountSetting.class).count);
+                radio.setCRCLength(entityContext.setting().getValue(Nrf24i01CrcSizeSetting.class).valueSupplier.get());
+                radio.setPALevel((short) entityContext.setting().getValue(Nrf24i01PALevelSetting.class).valueSupplier.get().swigValue());
+                radio.setDataRate(entityContext.setting().getValue(Nrf24i01DataRateSetting.class).valueSupplier.get());
 
                 radio.setChannel((short) 0x4c);
                 radio.printDetails();
@@ -151,10 +151,10 @@ public abstract class RF24Base {
                 log.info("Start listening NRF24L01");
 
                 radio.startListening();
-                entityContext.setSettingValue(Nrf24i01StatusSetting.class, BundleSettingPluginStatus.ONLINE);
+                entityContext.setting().setValue(Nrf24i01StatusSetting.class, BundleSettingPluginStatus.ONLINE);
             } catch (Exception ex) {
                 log.error("Error while init NRF24L01", ex);
-                entityContext.setSettingValue(Nrf24i01StatusSetting.class, BundleSettingPluginStatus.error(ex));
+                entityContext.setting().setValue(Nrf24i01StatusSetting.class, BundleSettingPluginStatus.error(ex));
                 radio = null;
             }
         }
