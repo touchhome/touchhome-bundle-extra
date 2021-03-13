@@ -1,17 +1,13 @@
 package org.touchhome.bundle.weather.setting;
 
-import org.touchhome.bundle.api.setting.BundleSettingPlugin;
+import org.touchhome.bundle.api.setting.SettingPluginOptionsEnum;
+import org.touchhome.bundle.api.Lang;
 
-public class WeatherLangSetting implements BundleSettingPlugin<String> {
-
-    @Override
-    public SettingType getSettingType() {
-        return SettingType.Text;
-    }
+public class WeatherLangSetting implements SettingPluginOptionsEnum<Lang> {
 
     @Override
-    public String getDefaultValue() {
-        return "en";
+    public Class<Lang> getType() {
+        return Lang.class;
     }
 
     @Override

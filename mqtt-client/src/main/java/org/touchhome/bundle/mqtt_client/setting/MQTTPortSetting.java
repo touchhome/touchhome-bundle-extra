@@ -1,16 +1,16 @@
 package org.touchhome.bundle.mqtt_client.setting;
 
-import org.touchhome.bundle.api.setting.BundleSettingPluginInteger;
+import org.touchhome.bundle.api.setting.SettingPluginInteger;
 
-public class MQTTPortSetting implements BundleSettingPluginInteger {
+public class MQTTPortSetting implements SettingPluginInteger {
 
     @Override
-    public int getMin() {
+    public Integer getMin() {
         return 1;
     }
 
     @Override
-    public int getMax() {
+    public Integer getMax() {
         return 65535;
     }
 

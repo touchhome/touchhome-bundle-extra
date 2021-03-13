@@ -3,7 +3,7 @@ package org.touchhome.bundle.nrf24i01.communication;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.touchhome.bundle.api.EntityContext;
-import org.touchhome.bundle.api.setting.BundleSettingPluginStatus;
+import org.touchhome.bundle.api.setting.SettingPluginStatus;
 import org.touchhome.bundle.nrf24i01.ArduinoBaseCommand;
 import org.touchhome.bundle.nrf24i01.setting.Nrf24i01StatusSetting;
 import org.touchhome.bundle.nrf24i01.setting.advanced.*;
@@ -151,10 +151,10 @@ public abstract class RF24Base {
                 log.info("Start listening NRF24L01");
 
                 radio.startListening();
-                entityContext.setting().setValue(Nrf24i01StatusSetting.class, BundleSettingPluginStatus.ONLINE);
+                entityContext.setting().setValue(Nrf24i01StatusSetting.class, SettingPluginStatus.ONLINE);
             } catch (Exception ex) {
                 log.error("Error while init NRF24L01", ex);
-                entityContext.setting().setValue(Nrf24i01StatusSetting.class, BundleSettingPluginStatus.error(ex));
+                entityContext.setting().setValue(Nrf24i01StatusSetting.class, SettingPluginStatus.error(ex));
                 radio = null;
             }
         }

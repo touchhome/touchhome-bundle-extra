@@ -1,11 +1,11 @@
 [INFO] Scanning for projects...
-[INFO] 
-[INFO] ------< org.touchhome.bundle.extra:touchhome-bundle-google-drive >------
+[INFO]
+[INFO] ------< org.touchhome.bundle.extra:touchhome-bundle-gdrive >------
 [INFO] Building Google-Drive 1.0.10-SNAPSHOT
 [INFO] --------------------------------[ jar ]---------------------------------
-[INFO] 
-[INFO] --- maven-dependency-plugin:3.1.2:tree (default-cli) @ touchhome-bundle-google-drive ---
-[INFO] org.touchhome.bundle.extra:touchhome-bundle-google-drive:jar:1.0.10-SNAPSHOT
+[INFO]
+[INFO] --- maven-dependency-plugin:3.1.2:tree (default-cli) @ touchhome-bundle-gdrive ---
+[INFO] org.touchhome.bundle.extra:touchhome-bundle-gdrive:jar:1.0.10-SNAPSHOT
 [INFO] +- com.google.apis:google-api-services-drive:jar:v3-rev197-1.25.0:compile
 [INFO] |  \- com.google.api-client:google-api-client:jar:1.25.0:compile
 [INFO] |     +- com.google.oauth-client:google-oauth-client:jar:1.25.0:compile

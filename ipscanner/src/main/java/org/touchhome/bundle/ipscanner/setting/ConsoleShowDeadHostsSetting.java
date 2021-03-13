@@ -1,13 +1,9 @@
 package org.touchhome.bundle.ipscanner.setting;
 
-import org.touchhome.bundle.api.setting.BundleConsoleSettingPlugin;
+import org.touchhome.bundle.api.setting.SettingPluginBoolean;
+import org.touchhome.bundle.api.setting.console.ConsoleSettingPlugin;
 
-public class ConsoleShowDeadHostsSetting implements BundleConsoleSettingPlugin<Boolean> {
-
-    @Override
-    public SettingType getSettingType() {
-        return SettingType.Boolean;
-    }
+public class ConsoleShowDeadHostsSetting implements ConsoleSettingPlugin<Boolean>, SettingPluginBoolean {
 
     @Override
     public int order() {
@@ -20,7 +16,7 @@ public class ConsoleShowDeadHostsSetting implements BundleConsoleSettingPlugin<B
     }
 
     @Override
-    public String getDefaultValue() {
-        return Boolean.TRUE.toString();
+    public boolean defaultValue() {
+        return true;
     }
 }

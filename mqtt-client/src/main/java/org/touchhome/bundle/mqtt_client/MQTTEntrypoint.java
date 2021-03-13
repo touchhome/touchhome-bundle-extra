@@ -7,10 +7,10 @@ import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.paho.client.mqttv3.*;
 import org.springframework.stereotype.Component;
-import org.touchhome.bundle.api.BundleEntrypoint;
+import org.touchhome.bundle.api.BundleEntryPoint;
 import org.touchhome.bundle.api.EntityContext;
-import org.touchhome.bundle.api.json.NotificationEntityJSON;
-import org.touchhome.bundle.api.util.NotificationType;
+import org.touchhome.bundle.api.ui.BellNotification;
+import org.touchhome.bundle.api.util.NotificationLevel;
 import org.touchhome.bundle.api.util.TouchHomeUtils;
 import org.touchhome.bundle.api.workspace.BroadcastLockManager;
 import org.touchhome.bundle.mqtt_client.setting.*;
@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
 @Log4j2
 @Component
 @RequiredArgsConstructor
-public class MQTTEntrypoint implements BundleEntrypoint, MqttCallbackExtended {
+public class MQTTEntrypoint implements BundleEntryPoint, MqttCallbackExtended {
 
     private final EntityContext entityContext;
     private final BroadcastLockManager broadcastLockManager;
@@ -70,11 +70,11 @@ public class MQTTEntrypoint implements BundleEntrypoint, MqttCallbackExtended {
     }
 
     @Override
-    public Set<NotificationEntityJSON> getNotifications() {
+    public Set<BellNotification> getBellNotifications() {
         String value = entityContext.setting().getValue(MQTTStatusSetting.class);
-        return new HashSet<>(Collections.singletonList(new NotificationEntityJSON("mqtt-status")
-                .setNotificationType(value.startsWith("Connection lost") ? NotificationType.error : NotificationType.success)
-                .setName("MQTT: " + value)));
+        return new HashSet<>(Collections.singletonList(new BellNotification("mqtt-status")
+                .setLevel(value.startsWith("Connection lost") ? NotificationLevel.error : NotificationLevel.success)
+                .setTitle("MQTT: " + value)));
     }
 
     @SneakyThrows

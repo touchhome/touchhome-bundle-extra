@@ -1,18 +1,8 @@
 package org.touchhome.bundle.weather.setting;
 
-import org.apache.commons.lang3.StringUtils;
-import org.touchhome.bundle.api.EntityContext;
-import org.touchhome.bundle.api.json.Option;
-import org.touchhome.bundle.api.setting.BundleSettingPlugin;
+import org.touchhome.bundle.api.setting.SettingPluginOptionsEnum;
 
-import java.util.List;
-
-public class WeatherUnitSetting implements BundleSettingPlugin<WeatherUnitSetting.WeatherUnit> {
-
-    @Override
-    public SettingType getSettingType() {
-        return SettingType.SelectBox;
-    }
+public class WeatherUnitSetting implements SettingPluginOptionsEnum<WeatherUnitSetting.WeatherUnit> {
 
     @Override
     public int order() {
@@ -20,18 +10,8 @@ public class WeatherUnitSetting implements BundleSettingPlugin<WeatherUnitSettin
     }
 
     @Override
-    public WeatherUnit parseValue(EntityContext entityContext, String value) {
-        return StringUtils.isEmpty(value) ? null : WeatherUnit.valueOf(value);
-    }
-
-    @Override
-    public String getDefaultValue() {
-        return WeatherUnit.metric.name();
-    }
-
-    @Override
-    public List<Option> loadAvailableValues(EntityContext entityContext) {
-        return Option.enumList(WeatherUnit.class);
+    public Class<WeatherUnit> getType() {
+        return WeatherUnit.class;
     }
 
     public enum WeatherUnit {

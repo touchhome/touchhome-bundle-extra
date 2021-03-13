@@ -4,7 +4,7 @@
     <parent>
         <artifactId>touchhome-bundle-extra</artifactId>
         <groupId>org.touchhome.bundle.extra</groupId>
-        <version>1.0.10-SNAPSHOT</version>
+        <version>1.1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -12,7 +12,7 @@
     <name>NRF24I01</name>
     <description>NRF24I01 uses for accessing arduino by air</description>
     <packaging>jar</packaging>
-    <version>1.0.10-SNAPSHOT</version>
+    <version>1.1.0-SNAPSHOT</version>
 
     <dependencies>
         <dependency>

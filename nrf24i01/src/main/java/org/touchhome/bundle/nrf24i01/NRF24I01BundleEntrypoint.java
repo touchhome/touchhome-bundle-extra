@@ -5,7 +5,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 import org.touchhome.bundle.api.BundleEntrypoint;
 import org.touchhome.bundle.api.EntityContext;
-import org.touchhome.bundle.api.setting.BundleSettingPluginStatus;
+import org.touchhome.bundle.api.setting.SettingPluginStatus;
 import org.touchhome.bundle.api.util.RaspberryGpioPin;
 import org.touchhome.bundle.api.util.TouchHomeUtils;
 import org.touchhome.bundle.arduino.model.ArduinoDeviceEntity;
@@ -41,7 +41,7 @@ public class NRF24I01BundleEntrypoint implements BundleEntrypoint {
                 System.load(TouchHomeUtils.getFilesPath().resolve("nrf24i01/librf24bcmjava.so").toAbsolutePath().toString());
             } catch (Throwable ex) {
                 log.error("Error while load nrf24i01 library");
-                entityContext.setting().setValue(Nrf24i01StatusSetting.class, BundleSettingPluginStatus.error(ex));
+                entityContext.setting().setValue(Nrf24i01StatusSetting.class, SettingPluginStatus.error(ex));
             }
         }
     }
@@ -114,7 +114,7 @@ public class NRF24I01BundleEntrypoint implements BundleEntrypoint {
     }
 
     @Override
-    public Class<? extends BundleSettingPluginStatus> getBundleStatusSetting() {
+    public Class<? extends SettingPluginStatus> getBundleStatusSetting() {
         return Nrf24i01StatusSetting.class;
     }
 

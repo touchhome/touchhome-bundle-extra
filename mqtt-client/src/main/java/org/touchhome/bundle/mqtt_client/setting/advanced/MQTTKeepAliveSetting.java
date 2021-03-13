@@ -1,8 +1,8 @@
 package org.touchhome.bundle.mqtt_client.setting.advanced;
 
-import org.touchhome.bundle.api.setting.BundleSettingPluginInteger;
+import org.touchhome.bundle.api.setting.SettingPluginInteger;
 
-public class MQTTKeepAliveSetting implements BundleSettingPluginInteger {
+public class MQTTKeepAliveSetting implements SettingPluginInteger {
 
     @Override
     public int defaultValue() {
@@ -10,12 +10,12 @@ public class MQTTKeepAliveSetting implements BundleSettingPluginInteger {
     }
 
     @Override
-    public int getMin() {
+    public Integer getMin() {
         return 10;
     }
 
     @Override
-    public int getMax() {
+    public Integer getMax() {
         return 600;
     }
 

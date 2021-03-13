@@ -1,10 +1,24 @@
 {
-  "drive": {
+  "field": {
+    "clientID": "Client ID",
+    "clientSecret": "Client secret"
+  },
+  "help": {
+    "field": {
+      "clientID": "Client ID",
+      "clientSecret": "Client secret"
+    }
+  },
+  "selection": {
+    "GDriveEntity": "Google drive"
+  },
+  "WORKSPACE": {
+    "gdrive-storage": "Google Drive"
+  },
+  "gdrive": {
     "name": "Google Drive",
-    "extensionDescription": "Google Drive blocks",
     "setting": {
       "label": "Google Drive settings",
-      "description": "To obtain Google Drive client id / client secret open <a target=\"_blank\", href=\"https://console.developers.google.com/henhouse/?pb=%5B%22hh-0%22%2C%22drive%22%2Cnull%2C%5B%5D%2C%22https%3A%2F%2Fdevelopers.google.com%22%2Cnull%2C%5B%5D%2Cnull%2C%22Enable%20the%20Drive%20API%22%2C1%2Cnull%2C%5B%5D%2Cfalse%2Cfalse%2Cnull%2Cnull%2Cnull%2Cnull%2Cfalse%2Cnull%2Cfalse%2Cfalse%2Cnull%2Cnull%2Cnull%2C%22DESKTOP%22%2Cnull%2C%22Quickstart%22%2Ctrue%2C%22Quickstart%22%2Cnull%2Cnull%2Cfalse%5D\">Link</a> and copy/paste values to correspond settings. Then you need reload page to apply settings. After press 'OAuth2 Authenticate' button to fetch Google Drive code and paste it to code field. Press restart Google Drive button. You should see message that app logged in to google drive successfully.",
       "st_GoogleDriveCodeSetting": "Google Drive code",
       "st_GoogleDriveAuthorizeOAuth2Setting": "Google Drive OAuth2 Authenticate",
       "st_GoogleDriveAccessTokenSetting": "Google Drive access token",

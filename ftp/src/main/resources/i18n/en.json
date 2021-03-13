@@ -1,0 +1,8 @@
+{
+  "WORKSPACE": {
+    "ftp-storage": "Ftp"
+  },
+  "selection": {
+    "FtpEntity": "FTP"
+  }
+}

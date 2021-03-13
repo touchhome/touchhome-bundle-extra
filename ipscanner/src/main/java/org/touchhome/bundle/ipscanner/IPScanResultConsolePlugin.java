@@ -3,34 +3,34 @@ package org.touchhome.bundle.ipscanner;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import net.azib.ipscan.IPScannerService;
 import net.azib.ipscan.core.ScanningResult;
 import org.springframework.stereotype.Component;
 import org.touchhome.bundle.api.EntityContext;
-import org.touchhome.bundle.api.console.ConsolePlugin;
+import org.touchhome.bundle.api.console.ConsolePluginTable;
 import org.touchhome.bundle.api.model.HasEntityIdentifier;
-import org.touchhome.bundle.api.setting.BundleSettingPlugin;
+import org.touchhome.bundle.api.setting.console.header.ConsoleHeaderSettingPlugin;
 import org.touchhome.bundle.api.ui.field.UIField;
 import org.touchhome.bundle.ipscanner.setting.ConsoleShowDeadHostsSetting;
 import org.touchhome.bundle.ipscanner.setting.IpScannerHeaderStartButtonSetting;
 
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 @RequiredArgsConstructor
-public class IPScanResultConsolePlugin implements ConsolePlugin {
+public class IPScanResultConsolePlugin implements ConsolePluginTable<IPScanResultConsolePlugin.IpAddressPluginEntity> {
 
     private final IPScannerService ipScannerService;
     private final EntityContext entityContext;
 
     @Override
-    @SneakyThrows
-    public List<? extends HasEntityIdentifier> drawEntity() {
+    public int order() {
+        return 2000;
+    }
+
+    @Override
+    public Collection<IpAddressPluginEntity> getValue() {
         List<IpAddressPluginEntity> list = new ArrayList<>();
         Boolean showDeadHosts = entityContext.setting().getValue(ConsoleShowDeadHostsSetting.class);
         for (IPScannerService.ResultValue resultValue : ipScannerService.getIpScannerContext().getScanningResults()) {
@@ -44,18 +44,18 @@ public class IPScanResultConsolePlugin implements ConsolePlugin {
     }
 
     @Override
-    public int order() {
-        return 2000;
+    public Map<String, Class<? extends ConsoleHeaderSettingPlugin<?>>> getHeaderActions() {
+        return Collections.singletonMap("ipscanner.start", IpScannerHeaderStartButtonSetting.class);
     }
 
     @Override
-    public Map<String, Class<? extends BundleSettingPlugin>> getHeaderActions() {
-        return Collections.singletonMap("ipscanner.start", IpScannerHeaderStartButtonSetting.class);
+    public Class<IpAddressPluginEntity> getEntityClass() {
+        return IpAddressPluginEntity.class;
     }
 
     @Getter
     @NoArgsConstructor
-    private static class IpAddressPluginEntity implements HasEntityIdentifier, Comparable<IpAddressPluginEntity> {
+    public static class IpAddressPluginEntity implements HasEntityIdentifier, Comparable<IpAddressPluginEntity> {
 
         @UIField(order = 1)
         private String ip;
@@ -103,11 +103,6 @@ public class IPScanResultConsolePlugin implements ConsolePlugin {
         @Override
         public String getEntityID() {
             return ip;
-        }
-
-        @Override
-        public Integer getId() {
-            return null;
         }
 
         @Override

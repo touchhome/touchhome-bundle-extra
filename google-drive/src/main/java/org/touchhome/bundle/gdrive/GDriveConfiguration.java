@@ -1,10 +1,10 @@
-package org.touchhome.bundle.drive;
+package org.touchhome.bundle.gdrive;
 
 import org.springframework.context.annotation.Configuration;
 import org.touchhome.bundle.api.BundleConfiguration;
 
 @Configuration
 @BundleConfiguration
-public class GoogleDriveConfiguration {
+public class GDriveConfiguration {
 
 }

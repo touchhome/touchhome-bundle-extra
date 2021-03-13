@@ -6,9 +6,8 @@ import net.azib.ipscan.IPScannerService;
 import net.azib.ipscan.core.state.ScanningState;
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
-import org.touchhome.bundle.api.BundleEntrypoint;
+import org.touchhome.bundle.api.BundleEntryPoint;
 import org.touchhome.bundle.api.EntityContext;
-import org.touchhome.bundle.api.json.NotificationEntityJSON;
 import org.touchhome.bundle.ipscanner.setting.ConsoleScannedPortsSetting;
 import org.touchhome.bundle.ipscanner.setting.IpScannerHeaderStartButtonSetting;
 import org.touchhome.bundle.ipscanner.setting.IpScannerHeaderStopButtonSetting;
@@ -16,22 +15,22 @@ import org.touchhome.bundle.ipscanner.setting.IpScannerHeaderStopButtonSetting;
 @Log4j2
 @Component
 @RequiredArgsConstructor
-public class IPScannerBundleEntrypoint implements BundleEntrypoint {
+public class IPScannerBundleEntrypoint implements BundleEntryPoint {
 
     private final EntityContext entityContext;
     private final IPScannerService ipScannerService;
 
     @Override
     public void init() {
-        NotificationEntityJSON scanJSON = new NotificationEntityJSON("ip-scanner-scan").setName("ipscanner.start_scan");
+        String scanEntityID = "ip-scanner-scan";
         ipScannerService.getScannerConfig().portString = entityContext.setting().getValue(ConsoleScannedPortsSetting.class).getString("ipscanner_ports");
-        ipScannerService.setCompleteHandler(() -> entityContext.ui().hideAlwaysOnViewNotification(scanJSON));
+        ipScannerService.setCompleteHandler(() -> entityContext.ui().removeHeaderButton(scanEntityID));
 
         entityContext.setting().listenValue(ConsoleScannedPortsSetting.class, "ipscanner-ports", jsonObject ->
                 ipScannerService.getScannerConfig().portString = jsonObject.getString("ipscanner_ports"));
         entityContext.setting().listenValue(IpScannerHeaderStopButtonSetting.class, "ipscanner-stop", this::stopScanning);
         entityContext.setting().listenValue(IpScannerHeaderStartButtonSetting.class, "ipscanner-start",
-                jsonObject -> startScanning(scanJSON, jsonObject));
+                jsonObject -> startScanning(scanEntityID, jsonObject));
     }
 
     @Override
@@ -42,19 +41,14 @@ public class IPScannerBundleEntrypoint implements BundleEntrypoint {
     }
 
     @Override
-    public String getBundleId() {
-        return "ipscanner";
-    }
-
-    @Override
     public int order() {
         return 6000;
     }
 
-    private void startScanning(NotificationEntityJSON scanJSON, JSONObject jsonObject) {
+    private void startScanning(String scanEntityID, JSONObject jsonObject) {
         if (ipScannerService.getStateMachine().inState(ScanningState.IDLE)) {
-            entityContext.ui().showAlwaysOnViewNotification(
-                    scanJSON, "fas fa-spin fa-hourglass-start", "#325E32", IpScannerHeaderStopButtonSetting.class);
+            entityContext.ui().addHeaderButton(scanEntityID, "ipscanner.start_scan",
+                    "fas fa-hourglass-start", "#325E32", true, IpScannerHeaderStopButtonSetting.class);
             ipScannerService.startScan(jsonObject.getString("startIP"), jsonObject.getString("endIP"));
         }
     }

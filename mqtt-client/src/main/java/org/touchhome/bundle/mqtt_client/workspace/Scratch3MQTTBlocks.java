@@ -5,9 +5,10 @@ import lombok.RequiredArgsConstructor;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.springframework.stereotype.Component;
 import org.touchhome.bundle.api.EntityContext;
-import org.touchhome.bundle.api.scratch.*;
 import org.touchhome.bundle.api.workspace.BroadcastLock;
 import org.touchhome.bundle.api.workspace.BroadcastLockManager;
+import org.touchhome.bundle.api.workspace.WorkspaceBlock;
+import org.touchhome.bundle.api.workspace.scratch.*;
 import org.touchhome.bundle.mqtt_client.MQTTEntrypoint;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -57,8 +58,6 @@ public class Scratch3MQTTBlocks extends Scratch3ExtensionBlocks {
         this.publish.addArgument(PAYLOAD, ArgumentType.string);
         this.publish.addArgument(LEVEL, this.publishLevelMenu);
         this.publish.addArgument(RETAINED, ArgumentType.checkbox);
-
-        postConstruct();
     }
 
     private void subscribeToAnything(WorkspaceBlock workspaceBlock) {

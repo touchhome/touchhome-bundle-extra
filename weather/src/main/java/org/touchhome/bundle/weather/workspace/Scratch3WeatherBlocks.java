@@ -5,7 +5,11 @@ import lombok.Getter;
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 import org.touchhome.bundle.api.EntityContext;
-import org.touchhome.bundle.api.scratch.*;
+import org.touchhome.bundle.api.workspace.WorkspaceBlock;
+import org.touchhome.bundle.api.workspace.scratch.ArgumentType;
+import org.touchhome.bundle.api.workspace.scratch.BlockType;
+import org.touchhome.bundle.api.workspace.scratch.Scratch3Block;
+import org.touchhome.bundle.api.workspace.scratch.Scratch3ExtensionBlocks;
 import org.touchhome.bundle.weather.WeatherBundleEntrypoint;
 import org.touchhome.bundle.weather.setting.WeatherProviderSetting;
 
@@ -37,8 +41,6 @@ public class Scratch3WeatherBlocks extends Scratch3ExtensionBlocks {
 
         this.pressureWeatherApi = Scratch3Block.ofEvaluate(4, "weather_pressure", BlockType.reporter, "Weather pressure of city [CITY]", this::readWeatherPressure);
         this.pressureWeatherApi.addArgument(CITY, ArgumentType.string);
-
-        this.postConstruct();
     }
 
     private Double readWeatherTemperature(WorkspaceBlock workspaceBlock) {

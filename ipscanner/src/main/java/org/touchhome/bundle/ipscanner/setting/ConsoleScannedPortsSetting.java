@@ -2,13 +2,14 @@ package org.touchhome.bundle.ipscanner.setting;
 
 import org.json.JSONObject;
 import org.touchhome.bundle.api.EntityContext;
-import org.touchhome.bundle.api.setting.BundleConsoleSettingPlugin;
-import org.touchhome.bundle.api.setting.BundleSettingPluginButton;
+import org.touchhome.bundle.api.setting.SettingPluginButton;
+import org.touchhome.bundle.api.setting.console.ConsoleSettingPlugin;
+import org.touchhome.bundle.api.ui.field.action.ActionInputParameter;
 
 import java.util.Collections;
 import java.util.List;
 
-public class ConsoleScannedPortsSetting implements BundleConsoleSettingPlugin<JSONObject>, BundleSettingPluginButton {
+public class ConsoleScannedPortsSetting implements ConsoleSettingPlugin<JSONObject>, SettingPluginButton {
 
     private static final String DEFAULT_VALUE = new JSONObject().put("ipscanner_ports", "80,443,8080").toString();
 
@@ -33,9 +34,8 @@ public class ConsoleScannedPortsSetting implements BundleConsoleSettingPlugin<JS
     }
 
     @Override
-    public List<InputParameter> getInputParameters(EntityContext entityContext, String value) {
-        return Collections.singletonList(new InputParameter("ipscanner_ports", InputParameterType.textarea,
-                null, getDefaultValue())
+    public List<ActionInputParameter> getInputParameters(EntityContext entityContext, String value) {
+        return Collections.singletonList(ActionInputParameter.textarea("ipscanner_ports", getDefaultValue())
                 .setDescription("ipscanner_ports_description"));
     }
 

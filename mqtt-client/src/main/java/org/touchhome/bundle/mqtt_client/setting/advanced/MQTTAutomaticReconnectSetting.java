@@ -1,17 +1,12 @@
 package org.touchhome.bundle.mqtt_client.setting.advanced;
 
-import org.touchhome.bundle.api.setting.BundleSettingPlugin;
+import org.touchhome.bundle.api.setting.SettingPluginBoolean;
 
-public class MQTTAutomaticReconnectSetting implements BundleSettingPlugin<Boolean> {
-
-    @Override
-    public SettingType getSettingType() {
-        return SettingType.Boolean;
-    }
+public class MQTTAutomaticReconnectSetting implements SettingPluginBoolean {
 
     @Override
-    public String getDefaultValue() {
-        return Boolean.TRUE.toString();
+    public boolean defaultValue() {
+        return true;
     }
 
     @Override

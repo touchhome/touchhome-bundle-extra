@@ -13,7 +13,6 @@
   },
   "weather": {
     "name": "Weather",
-    "extensionDescription": "Weather blocks",
     "setting": {
       "label": "Weather settings",
       "st_WeatherProviderSetting": "Weather provider",

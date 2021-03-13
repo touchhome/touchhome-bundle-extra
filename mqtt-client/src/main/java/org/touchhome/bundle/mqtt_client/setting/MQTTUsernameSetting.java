@@ -1,13 +1,8 @@
 package org.touchhome.bundle.mqtt_client.setting;
 
-import org.touchhome.bundle.api.setting.BundleSettingPlugin;
+import org.touchhome.bundle.api.setting.SettingPluginText;
 
-public class MQTTUsernameSetting implements BundleSettingPlugin<String> {
-
-    @Override
-    public SettingType getSettingType() {
-        return SettingType.Text;
-    }
+public class MQTTUsernameSetting implements SettingPluginText {
 
     @Override
     public int order() {

@@ -3,16 +3,16 @@ package org.touchhome.bundle.nrf24i01.setting.advanced;
 import org.apache.commons.lang3.StringUtils;
 import org.touchhome.bundle.api.EntityContext;
 import org.touchhome.bundle.api.json.Option;
-import org.touchhome.bundle.api.setting.BundleSettingPlugin;
+import org.touchhome.bundle.api.setting.SettingPlugin;
 import org.touchhome.bundle.nrf24i01.options.PALevel;
 
 import java.util.List;
 
-public class Nrf24i01PALevelSetting implements BundleSettingPlugin<PALevel> {
+public class Nrf24i01PALevelSetting implements SettingPlugin<PALevel> {
 
     @Override
-    public SettingType getSettingType() {
-        return SettingType.SelectBox;
+    public UIFieldType getSettingType() {
+        return UIFieldType.SelectBox;
     }
 
     @Override

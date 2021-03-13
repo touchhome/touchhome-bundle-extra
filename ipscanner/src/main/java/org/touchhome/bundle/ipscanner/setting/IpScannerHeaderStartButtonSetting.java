@@ -1,12 +1,15 @@
 package org.touchhome.bundle.ipscanner.setting;
 
+import org.json.JSONObject;
 import org.touchhome.bundle.api.EntityContext;
-import org.touchhome.bundle.api.setting.BundleSettingPluginButton;
+import org.touchhome.bundle.api.setting.SettingPluginButton;
+import org.touchhome.bundle.api.setting.console.header.ConsoleHeaderSettingPlugin;
+import org.touchhome.bundle.api.ui.field.action.ActionInputParameter;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class IpScannerHeaderStartButtonSetting implements BundleSettingPluginButton {
+public class IpScannerHeaderStartButtonSetting implements ConsoleHeaderSettingPlugin<JSONObject>, SettingPluginButton {
 
     @Override
     public String getIcon() {
@@ -14,15 +17,15 @@ public class IpScannerHeaderStartButtonSetting implements BundleSettingPluginBut
     }
 
     @Override
-    public List<InputParameter> getInputParameters(EntityContext entityContext, String value) {
-        return Arrays.asList(
-                new InputParameter("startIP", InputParameterType.text, InputParameterValidator.ip, "0.0.0.0"),
-                new InputParameter("endIP", InputParameterType.text, InputParameterValidator.ip, "0.0.0.1")
-        );
+    public int order() {
+        return 100;
     }
 
     @Override
-    public int order() {
-        return 100;
+    public List<ActionInputParameter> getInputParameters(EntityContext entityContext, String value) {
+        return Arrays.asList(
+                ActionInputParameter.ip("startIP", "0.0.0.0"),
+                ActionInputParameter.ip("endIP", "0.0.0.1")
+        );
     }
 }
