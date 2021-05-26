@@ -5,8 +5,7 @@ import com.google.api.client.auth.oauth2.Credential;
 import org.apache.commons.lang3.StringUtils;
 import org.touchhome.bundle.api.EntityContext;
 import org.touchhome.bundle.api.Lang;
-import org.touchhome.bundle.api.entity.MiscEntity;
-import org.touchhome.bundle.api.fs.BaseFileSystemEntity;
+import org.touchhome.bundle.api.entity.StorageEntity;
 import org.touchhome.bundle.api.model.Status;
 import org.touchhome.bundle.api.ui.UISidebarChildren;
 import org.touchhome.bundle.api.ui.field.UIField;
@@ -20,7 +19,7 @@ import java.util.*;
 
 @Entity
 @UISidebarChildren(icon = "fab fa-google-drive", color = "#0DA10A")
-public class GDriveEntity extends MiscEntity<GDriveEntity> implements BaseFileSystemEntity<GDriveEntity, GDriveFileSystem> {
+public class GDriveEntity extends StorageEntity<GDriveEntity, GDriveFileSystem> {
 
     public static final String PREFIX = "gdrive_";
 

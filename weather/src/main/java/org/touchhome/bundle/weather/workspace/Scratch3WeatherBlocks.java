@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 import org.touchhome.bundle.api.EntityContext;
 import org.touchhome.bundle.api.workspace.WorkspaceBlock;
 import org.touchhome.bundle.api.workspace.scratch.ArgumentType;
-import org.touchhome.bundle.api.workspace.scratch.BlockType;
 import org.touchhome.bundle.api.workspace.scratch.Scratch3Block;
 import org.touchhome.bundle.api.workspace.scratch.Scratch3ExtensionBlocks;
 import org.touchhome.bundle.weather.WeatherBundleEntrypoint;
@@ -30,16 +29,16 @@ public class Scratch3WeatherBlocks extends Scratch3ExtensionBlocks {
     public Scratch3WeatherBlocks(EntityContext entityContext, WeatherBundleEntrypoint weatherBundleEntrypoint) {
         super("#3B798C", entityContext, weatherBundleEntrypoint);
 
-        this.weatherApi = Scratch3Block.ofEvaluate(4, "weather", BlockType.reporter, "Weather of city [CITY] (JSON)", this::readWeather);
+        this.weatherApi = Scratch3Block.ofReporter(11, "weather", "Weather of city [CITY] (JSON)", this::readWeather);
         this.weatherApi.addArgument(CITY, ArgumentType.string);
 
-        this.temperatureWeatherApi = Scratch3Block.ofEvaluate(4, "weather_temp", BlockType.reporter, "Weather temp of city [CITY]", this::readWeatherTemperature);
+        this.temperatureWeatherApi = Scratch3Block.ofReporter(22, "weather_temp", "Weather temp of city [CITY]", this::readWeatherTemperature);
         this.temperatureWeatherApi.addArgument(CITY, ArgumentType.string);
 
-        this.humidityWeatherApi = Scratch3Block.ofEvaluate(4, "weather_humidity", BlockType.reporter, "Weather humidity of city [CITY]", this::readWeatherHumidity);
+        this.humidityWeatherApi = Scratch3Block.ofReporter(33, "weather_humidity", "Weather humidity of city [CITY]", this::readWeatherHumidity);
         this.humidityWeatherApi.addArgument(CITY, ArgumentType.string);
 
-        this.pressureWeatherApi = Scratch3Block.ofEvaluate(4, "weather_pressure", BlockType.reporter, "Weather pressure of city [CITY]", this::readWeatherPressure);
+        this.pressureWeatherApi = Scratch3Block.ofReporter(44, "weather_pressure", "Weather pressure of city [CITY]", this::readWeatherPressure);
         this.pressureWeatherApi.addArgument(CITY, ArgumentType.string);
     }
 

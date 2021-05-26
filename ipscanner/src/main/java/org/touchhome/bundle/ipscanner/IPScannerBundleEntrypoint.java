@@ -47,8 +47,8 @@ public class IPScannerBundleEntrypoint implements BundleEntryPoint {
 
     private void startScanning(String scanEntityID, JSONObject jsonObject) {
         if (ipScannerService.getStateMachine().inState(ScanningState.IDLE)) {
-            entityContext.ui().addHeaderButton(scanEntityID, "ipscanner.start_scan",
-                    "fas fa-hourglass-start", "#325E32", true, IpScannerHeaderStopButtonSetting.class);
+            entityContext.ui().addHeaderButton(scanEntityID, "#325E32", "ipscanner.start_scan",
+                    "fas fa-hourglass-start", true, true, null, null, IpScannerHeaderStopButtonSetting.class);
             ipScannerService.startScan(jsonObject.getString("startIP"), jsonObject.getString("endIP"));
         }
     }

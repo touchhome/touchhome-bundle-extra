@@ -40,14 +40,14 @@ public class Scratch3MQTTBlocks extends Scratch3ExtensionBlocks {
         this.publishLevelMenu = MenuBlock.ofStatic(LEVEL, QoSLevel.class, QoSLevel.AtMostOnce);
 
         // blocks
-        this.subscribeToAnything = Scratch3Block.ofHandler(10, "subscribe_any", BlockType.hat,
+        this.subscribeToAnything = Scratch3Block.ofHat(10, "subscribe_any",
                 "Subscribe to any topic", this::subscribeToAnything);
 
-        this.subscribe = Scratch3Block.ofHandler(20, "subscribe_topic", BlockType.hat,
+        this.subscribe = Scratch3Block.ofHat(20, "subscribe_topic",
                 "Subscribe to topic [TOPIC]", workspaceBlock -> subscribeToValue(workspaceBlock, null));
         this.subscribe.addArgument(TOPIC, ArgumentType.string);
 
-        this.subscribeToValue = Scratch3Block.ofHandler(30, "subscribe_payload", BlockType.hat,
+        this.subscribeToValue = Scratch3Block.ofHat(30, "subscribe_payload",
                 "Subscribe to topic [TOPIC] and payload [PAYLOAD]", this::subscribeToValue);
         this.subscribeToValue.addArgument(TOPIC);
         this.subscribeToValue.addArgument(PAYLOAD);
@@ -76,10 +76,12 @@ public class Scratch3MQTTBlocks extends Scratch3ExtensionBlocks {
     }
 
     private void subscribeToValue(WorkspaceBlock workspaceBlock, String payload, String topic) {
-        if (workspaceBlock.getNext() != null && isNotBlank(topic)) {
-            BroadcastLock lock = broadcastLockManager.getOrCreateLock(workspaceBlock, "mqtt-" + topic, payload);
-            workspaceBlock.subscribeToLock(lock);
-        }
+        workspaceBlock.handleNextOptional(next -> {
+            if (isNotBlank(topic)) {
+                BroadcastLock lock = broadcastLockManager.getOrCreateLock(workspaceBlock, "mqtt-" + topic, payload);
+                workspaceBlock.subscribeToLock(lock, next::handle);
+            }
+        });
     }
 
     private void publish(WorkspaceBlock workspaceBlock) throws MqttException {

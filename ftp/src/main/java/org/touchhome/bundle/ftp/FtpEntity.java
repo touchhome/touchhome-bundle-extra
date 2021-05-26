@@ -6,8 +6,7 @@ import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.net.ftp.FTPClient;
 import org.touchhome.bundle.api.EntityContext;
-import org.touchhome.bundle.api.entity.MiscEntity;
-import org.touchhome.bundle.api.fs.BaseFileSystemEntity;
+import org.touchhome.bundle.api.entity.StorageEntity;
 import org.touchhome.bundle.api.model.ActionResponseModel;
 import org.touchhome.bundle.api.ui.UISidebarChildren;
 import org.touchhome.bundle.api.ui.field.UIField;
@@ -25,7 +24,7 @@ import java.util.Set;
 
 @Entity
 @UISidebarChildren(icon = "fas fa-network-wired", color = "#b32317")
-public class FtpEntity extends MiscEntity<FtpEntity> implements BaseFileSystemEntity<FtpEntity, FtpFileSystem> {
+public class FtpEntity extends StorageEntity<FtpEntity, FtpFileSystem> {
 
     public static final String PREFIX = "ftp_";
 
