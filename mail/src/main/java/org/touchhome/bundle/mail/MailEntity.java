@@ -15,7 +15,7 @@ import org.touchhome.bundle.api.model.Status;
 import org.touchhome.bundle.api.ui.UISidebarChildren;
 import org.touchhome.bundle.api.ui.field.UIField;
 import org.touchhome.bundle.api.ui.field.UIFieldGroup;
-import org.touchhome.bundle.api.ui.field.UIFieldRenderAsHTML;
+import org.touchhome.bundle.api.ui.field.UIFieldType;
 import org.touchhome.bundle.api.ui.field.color.UIFieldColorStatusMatch;
 import org.touchhome.bundle.api.util.SecureString;
 
@@ -48,8 +48,7 @@ public class MailEntity extends CommunicationEntity<MailEntity> implements HasSt
     @Column(length = 512)
     private String statusMessage;
 
-    @UIField(order = 1, required = true, readOnly = true, hideOnEmpty = true, fullWidth = true, bg = "#334842")
-    @UIFieldRenderAsHTML
+    @UIField(order = 1, required = true, readOnly = true, hideOnEmpty = true, fullWidth = true, bg = "#334842", type = UIFieldType.HTML)
     public String getDescription() {
         if (StringUtils.isEmpty(getSender())
                 || StringUtils.isEmpty(getSmtpHostname())

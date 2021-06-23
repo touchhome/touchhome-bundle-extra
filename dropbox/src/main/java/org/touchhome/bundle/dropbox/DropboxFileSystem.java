@@ -11,8 +11,8 @@ import com.google.common.primitives.Bytes;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.StringUtils;
 import org.touchhome.bundle.api.EntityContext;
-import org.touchhome.bundle.api.fs.CachedFileSystem;
-import org.touchhome.bundle.api.fs.VendorFileSystem;
+import org.touchhome.bundle.api.entity.storage.CachedFileSystem;
+import org.touchhome.bundle.api.entity.storage.VendorFileSystem;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

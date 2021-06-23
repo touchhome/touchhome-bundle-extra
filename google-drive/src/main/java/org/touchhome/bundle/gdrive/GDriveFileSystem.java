@@ -21,8 +21,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.apache.commons.io.IOUtils;
 import org.touchhome.bundle.api.EntityContext;
-import org.touchhome.bundle.api.fs.CachedFileSystem;
-import org.touchhome.bundle.api.fs.VendorFileSystem;
+import org.touchhome.bundle.api.entity.storage.CachedFileSystem;
+import org.touchhome.bundle.api.entity.storage.VendorFileSystem;
 
 import java.io.IOException;
 import java.util.ArrayList;

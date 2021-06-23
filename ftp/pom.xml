@@ -12,6 +12,7 @@
     <artifactId>touchhome-bundle-ftp</artifactId>
     <packaging>jar</packaging>
     <version>1.3.0-SNAPSHOT</version>
+    <description>storage:Ftp storage</description>
 
     <build>
         <plugins>

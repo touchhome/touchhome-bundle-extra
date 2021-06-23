@@ -3,7 +3,8 @@ package org.touchhome.bundle.dropbox;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.StringUtils;
 import org.touchhome.bundle.api.EntityContext;
-import org.touchhome.bundle.api.entity.StorageEntity;
+import org.touchhome.bundle.api.entity.storage.BaseFileSystemEntity;
+import org.touchhome.bundle.api.entity.storage.StorageEntity;
 import org.touchhome.bundle.api.ui.UISidebarChildren;
 import org.touchhome.bundle.api.ui.field.UIField;
 import org.touchhome.bundle.api.ui.field.action.impl.DynamicContextMenuAction;
@@ -17,7 +18,7 @@ import java.util.Set;
 
 @Entity
 @UISidebarChildren(icon = "fab fa-dropbox", color = "#0d2481")
-public class DropboxEntity extends StorageEntity<DropboxEntity, DropboxFileSystem> {
+public class DropboxEntity extends StorageEntity<DropboxEntity> implements BaseFileSystemEntity<DropboxEntity, DropboxFileSystem> {
 
     public static final String PREFIX = "dropbox_";
 

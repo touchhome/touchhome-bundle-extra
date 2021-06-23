@@ -12,6 +12,7 @@
     <name>Google-Drive</name>
     <packaging>jar</packaging>
     <version>1.3.0-SNAPSHOT</version>
+    <description>storage:GDrive storage</description>
 
     <dependencies>
         <dependency>

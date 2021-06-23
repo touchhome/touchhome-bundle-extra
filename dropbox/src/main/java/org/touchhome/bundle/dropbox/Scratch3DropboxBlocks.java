@@ -3,7 +3,7 @@ package org.touchhome.bundle.dropbox;
 import lombok.Getter;
 import org.springframework.stereotype.Component;
 import org.touchhome.bundle.api.EntityContext;
-import org.touchhome.bundle.api.fs.Scratch3BaseFileSystemExtensionBlocks;
+import org.touchhome.bundle.api.entity.storage.Scratch3BaseFileSystemExtensionBlocks;
 
 @Getter
 @Component

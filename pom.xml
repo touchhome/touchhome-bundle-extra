@@ -34,6 +34,7 @@
         <module>dropbox</module>
         <module>ftp</module>
         <module>mail</module>
+        <module>influxdb</module>
     </modules>
 
     <properties>

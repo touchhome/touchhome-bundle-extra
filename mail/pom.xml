@@ -11,7 +11,7 @@
     <name>Mail bundles</name>
     <artifactId>touchhome-bundle-mail</artifactId>
     <packaging>jar</packaging>
-    <description>This binding is used to access POP3, IMAP and SMTP servers.</description>
+    <description>communication:This binding is used to access POP3, IMAP and SMTP servers.</description>
 
     <dependencies>
         <dependency>
